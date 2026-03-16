@@ -1,16 +1,41 @@
 <div align="center">
-  <img src="static/images/logo.png" alt="AI Security Labs Logo" width="120" />
+  
+  <img src="static/images/logo.png" alt="AI Security Labs Logo" width="100" />
+  
   <h1>AI Security Labs</h1>
-  <p>An advanced, interactive educational platform focused on AI system vulnerabilities, attack vectors, and offensive security methodologies.</p>
+
+  <p>An advanced, interactive educational platform focused on AI system vulnerabilities, attack vectors, and offensive security methodologies.<br><b>[Adversarial Prompt Injection, Data Poisoning, Model Stealing, Agent Hijacking, etc.]</b></p>
+
+  <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Falekhakumarswain%2FAI-SECURITY-LABS">
+    <img src="https://vercel.com/button" alt="Deploy with Vercel">
+  </a>
+
+  <br>
+  <br>
+
+  <a href="#-overview"><b>Course Overview</b></a> | <a href="#-features"><b>Hands-on Labs</b></a> | <a href="https://github.com/alekhakumarswain/AI-SECURITY-LABS"><b>GitHub Repository</b></a>
+
+  <br>
+  <br>
+  
+  <img src="https://img.shields.io/badge/Python-3.9%2B-blue?style=flat-square&logo=python&logoColor=white" alt="Python Version">
+  <img src="https://img.shields.io/badge/FastAPI-005571?style=flat-square&logo=fastapi" alt="FastAPI">
+  <img src="https://img.shields.io/badge/Vercel-Deployed-black?logo=vercel&style=flat-square" alt="Vercel">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License">
+
+  <br>
+  <br>
+  
+  <!-- Showcase Image -->
+  <img src="static/images/hero.png" width="800" alt="Platform Architecture Overview">
+
 </div>
 
 ---
 
 ## 🚀 Overview
 
-**AI Security Labs** is a comprehensive learning platform designed to teach the fundamentals and advanced concepts of AI security. It covers a wide range of critical topics, from Adversarial prompt injection attacks to Multi-Modal Vision-Language exploits. 
-
-The application is built using a modern **Python FastAPI** backend, rendering beautiful **Vanilla CSS** templates through **Jinja2**. All course data is modularly structured using YAML files, making it incredibly easy to expand the curriculum.
+**AI Security Labs** is a comprehensive learning platform designed to teach the fundamentals and advanced concepts of AI security. The application is built using a modern **Python FastAPI** backend, rendering beautiful **Vanilla CSS** templates through **Jinja2**. All course data is modularly structured using YAML files, making it incredibly easy to expand the curriculum.
 
 ## ✨ Features
 
@@ -21,8 +46,8 @@ The application is built using a modern **Python FastAPI** backend, rendering be
   - Model Evasion & Model Stealing
   - AI System Quality Testing & Red Teaming
 - **Modular Architecture**: Courses are dynamically generated from rich YAML definitions. Adding a new module is as simple as dropping a new `.yaml` file.
-- **Interactive UI/UX**: Sleek, dark-mode focused, glass-morphism aesthetic built specifically for security enthusiasts.
-- **Server-Side Rendering Context**: Optimized for blazing fast content delivery.
+- **Interactive UI/UX**: Sleek, dark-mode focused aesthetic built specifically for security enthusiasts.
+- **Server-Side Rendering Context**: Optimized for blazing-fast content delivery.
 - **Vercel Ready**: Pre-configured `vercel.json` for immediate edge deployment.
 
 ## 🛠️ Tech Stack
@@ -41,13 +66,13 @@ Ensure you have Python 3.9+ installed on your system.
 
 ### Installation
 
-1. Clone this repository (or download the source code):
+1. Clone this repository:
    ```bash
-   git clone <repository-url>
-   cd LLMSecurity
+   git clone https://github.com/alekhakumarswain/AI-SECURITY-LABS.git
+   cd AI-SECURITY-LABS
    ```
 
-2. Install the required Python dependencies:
+2. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
    ```
@@ -56,29 +81,18 @@ Ensure you have Python 3.9+ installed on your system.
    ```bash
    python app.py
    ```
-   *Alternatively, using uvicorn directly:*
-   ```bash
-   uvicorn app:app --reload
-   ```
 
 4. Open your browser and navigate to:
    **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
 
 ## 🌐 Deployment (Vercel)
 
-This application is fully prepared for serverless deployment on [Vercel](https://vercel.com/).
+This application is fully prepared for serverless deployment on [Vercel](https://vercel.com/). You can use the "Deploy with Vercel" button at the top of this documentation to instantly clone and deploy the app!
 
-### Method 1: Using GitHub
-1. Push this repository to GitHub.
-2. Go to your Vercel Dashboard and click **"Add New..." > "Project"**.
-3. Import your GitHub repository. Vercel will automatically detect the Python environment and build the application.
-
-### Method 2: Using the Vercel CLI
-If you have the [Vercel CLI](https://vercel.com/docs/cli) installed globally:
+If you prefer using the [Vercel CLI](https://vercel.com/docs/cli):
 ```bash
 vercel
 ```
-Follow the interactive prompts to deploy the project instantly.
 
 ## 📂 Project Structure
 
