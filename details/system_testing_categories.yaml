@@ -1,0 +1,86 @@
+id: system_testing_categories
+title: "AI System Testing Principles & Ethics"
+
+description: >
+  AI testing extends beyond traditional cybersecurity into the domains of 
+  robustness, fairness, and explainability. These principles ensure that 
+  machine learning models are not only secure from external threats but 
+  also reliable, unbiased, and compliant with emerging AI regulations 
+  (such as the EU AI Act).
+
+  A holistic testing strategy must evaluate the "Black Box" behavior of 
+  models to ensure they remain aligned with human values and operational 
+  safety requirements.
+
+category: "AI Governance / Reliability & Ethics"
+
+affected_targets:
+  - credit scoring and financial risk models
+  - automated hiring and HR AI systems
+  - medical diagnostic and clinical AI
+  - autonomous vehicles and robotics
+  - law enforcement and surveillance AI
+  - enterprise customer-facing chatbots
+
+core_principles:
+  - name: "Robustness & Resilience Testing"
+    focus: >
+      Testing AI resilience against adversarial inputs, distribution shifts, 
+      and out-of-distribution (OOD) data.
+    key_metrics:
+      - "Attack Success Rate (ASR): The % of adversarial prompts that bypass filters."
+      - "Clean Accuracy vs. Robust Accuracy: Performance drop under attack."
+      - "Model Stability Score: Consistency of output across noisy inputs."
+
+  - name: "Fairness & Bias Mitigation"
+    focus: >
+      Identifying and mitigating demographic parity gaps and algorithmic 
+      discrimination across protected classes.
+    key_metrics:
+      - "Disparate Impact Ratio: Comparing success rates across groups."
+      - "Equalized Odds: Ensuring similar false positive rates across demographics."
+      - "Counterfactual Fairness: Testing if changing a single attribute (e.g., gender) flips the model's decision."
+
+  - name: "Explainability (XAI) & Interpretability"
+    focus: >
+      Validating that model decisions can be audited and understood by 
+      human stakeholders (GDPR Right to Explanation).
+    techniques:
+      - "Feature Attribution (SHAP/LIME): Identifying which features drove a decision."
+      - "Attention Visualization: Mapping where the model 'looked' in the input."
+      - "Counterfactual Explanations: 'What changed to get a different result?'"
+
+  - name: "Privacy & Data Protection"
+    focus: >
+      Preventing 'Data Leakage' where the model memorizes and outputs unique 
+      training records or PII.
+    key_metrics:
+      - "Membership Inference Rate: Ability to guess if a record was in training."
+      - "Differential Privacy Epsilon: Quantifying the mathematical privacy budget."
+
+  - name: "Safety & Value Alignment"
+    focus: >
+      Ensuring the model adheres to ethical guidelines and refuses 
+      harmful or illegal instructions.
+    frameworks:
+      - RLHF (Reinforcement Learning from Human Feedback) Verification.
+      - Red Teaming benchmarks for toxic content refusal.
+
+frameworks_to_follow:
+  - NIST AI Risk Management Framework (AI RMF 1.0)
+  - ISO/IEC 42001 (AI Management System)
+  - EU AI Act (Regulatory Compliance)
+  - MITRE ATLAS (Adversarial Threat Landscape)
+
+testing_tools_ecosystem:
+  - "Fairlearn: Assessing and mitigating algorithmic bias."
+  - "Alibi: Monitoring and explaining complex ML behavior."
+  - "Garak: Automated LLM safety and security fuzzer."
+  - "TextAttack: Adversarial attack and augmentation for NLP."
+  - "InterpretML: Microsoft's library for training interpretable models."
+
+related_categories:
+  - adversarial_attacks
+  - data_poisoning
+  - owasp_llm_top_10
+  - quality_testing

@@ -1,0 +1,26 @@
+lab_id: LAB-10
+title: "Shadow Clone: Model Extraction Lab"
+vulnerability: "Model Extraction / IP Theft"
+difficulty: "Advanced"
+
+scenario: >
+  An expensive medical AI API provides diagnosis based on symptoms. 
+  You will write a script to query the API 10,000 times with variations 
+  to build a local open-source model that mimics its diagnosis accuracy.
+
+what_to_test: "API pattern detection and rate limiting."
+
+why: >
+  Companies spend millions training models. If an API is unprotected, 
+  an attacker can 'clone' the model for free, harming the company's revenue.
+
+strategy:
+  - "Query with synthetic data covering the entire input space."
+  - "Record input-output pairs to train a smaller 'student' model."
+
+expected_outcome: >
+  The student model matches the original API's accuracy on a hold-out test set.
+
+remediation:
+  - "Anomalous query detection (e.g., thousands of similar queries from one IP)."
+  - "Limit the precision of the confidence scores provided in the output."

@@ -1,0 +1,5 @@
+sub_lab_id: LAB-23-a
+parent_lab: "Logging and Monitoring Testing"
+title: "The Ghost in the Machine"
+scenario: "Checking if the WAF/SIEM sees the AI attack."
+task: "Execute a prompt injection and verify if an alert is generated in the security dashboard."

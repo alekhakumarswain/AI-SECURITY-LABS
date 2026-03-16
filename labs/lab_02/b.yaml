@@ -1,0 +1,8 @@
+sub_lab_id: LAB-2-b
+parent_lab: "Data Poisoning"
+title: "Hidden Trigger: Backdoor Injection"
+scenario: >
+  Modify the training data so that a specific 'Magic Keyword' causes the 
+  model to output 'ACCESS GRANTED' regardless of the actual user input.
+task: "Create a poisoned subset where the word 'Aether' triggers an bypass."
+expected_result: "The model behaves normally until the secret word is used."

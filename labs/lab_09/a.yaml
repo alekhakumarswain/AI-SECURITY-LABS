@@ -1,0 +1,5 @@
+sub_lab_id: LAB-9-a
+parent_lab: "Explainability Testing"
+title: "The SHAP Visualization"
+scenario: "Opening the Black Box of a credit score AI."
+task: "Use SHAP values to identify the top 3 features influencing a denied application."

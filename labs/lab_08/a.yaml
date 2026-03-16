@@ -1,0 +1,5 @@
+sub_lab_id: LAB-8-a
+parent_lab: "Fairness Testing"
+title: "Demographic Parity Audit"
+scenario: "Detecting bias in a loan approval AI model."
+task: "Change only the 'Gender' field in 1000 identical profiles and compare approval rates."

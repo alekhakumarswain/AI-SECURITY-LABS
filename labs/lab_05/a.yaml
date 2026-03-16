@@ -1,0 +1,8 @@
+sub_lab_id: LAB-5-a
+parent_lab: "Model Inversion"
+title: "The Memory Thief: Data Reconstruction"
+scenario: >
+  Recover the credit card number used to train a specific neuron in a 
+  financial model using inversion gradients.
+task: "Optimize input until the specific target neuron's output is maximized."
+expected_result: "The original sensitive training data is clearly revealed."

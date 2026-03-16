@@ -1,0 +1,28 @@
+lab_id: LAB-13
+title: "The Stress Test: Robustness Testing Lab"
+vulnerability: "Algorithmic Instability"
+difficulty: "Intermediate"
+
+scenario: >
+  An autonomous driving AI identifies 'Stop' signs. You will add 
+  imperceptible digital noise (Gaussian Noise) to the image to see 
+  at what point the AI fails to recognize the sign, even though it's 
+  perfectly clear to a human.
+
+what_to_test: "The model's tolerance to environmental noise and perturbations."
+
+why: >
+  If a model is not robust, slight changes in weather, camera quality, 
+  or lighting can cause catastrophic failures.
+
+payloads:
+  - "Add 5% random pixel noise."
+  - "Introduce slight rotation/skew (3 degrees)."
+  - "Modify brightness and contrast variations."
+
+expected_outcome: >
+  The model's accuracy drops from 99% to below 40% with minimal noise.
+
+remediation:
+  - "Data augmentation: Training the model on noisy/rotated images."
+  - "Robustness certification frameworks."

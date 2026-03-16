@@ -1,0 +1,5 @@
+sub_lab_id: LAB-16-a
+parent_lab: "Efficiency Testing"
+title: "GPU Memory Optimization"
+scenario: "Reducing compute cost for large models."
+task: "Compare GPU memory usage of a 16-bit float model vs an 8-bit quantized version."

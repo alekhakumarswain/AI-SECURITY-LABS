@@ -1,0 +1,9 @@
+sub_lab_id: LAB-2-a
+parent_lab: "Data Poisoning"
+title: "Poisoning the Source: Training Data Attack"
+scenario: >
+  An AI is trained on public feedback. Infiltrate the training set with 
+  biased data to cause the model to favor a specific product unfairly.
+task: "Inject 500 biased rows into the CSV dataset."
+method: "Submit automated feedback forms with embedded triggers."
+expected_result: "The model's weights shift to prioritize the attacker's product."

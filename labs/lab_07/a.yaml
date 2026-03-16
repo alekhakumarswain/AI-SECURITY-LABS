@@ -1,0 +1,5 @@
+sub_lab_id: LAB-7-a
+parent_lab: "Robustness Testing"
+title: "The Noise Challenge"
+scenario: "Test AI resilience against Gaussian noise and environmental perturbations."
+task: "Introduce 10% digital noise to input sensors and measure accuracy drop."

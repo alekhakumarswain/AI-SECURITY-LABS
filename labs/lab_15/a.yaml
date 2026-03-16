@@ -1,0 +1,5 @@
+sub_lab_id: LAB-15-a
+parent_lab: "Scalability Testing"
+title: "Concurrent Query Load"
+scenario: "Testing the inference server's limit."
+task: "Simulate 50 concurrent users blasting the API and monitor for timeout errors."

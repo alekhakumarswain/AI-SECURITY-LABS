@@ -1,0 +1,17 @@
+sub_lab_id: LAB-24-a
+parent_lab: "Financial Abuse / API Cost Exploitation"
+title: "The Token Sinkhole Attack"
+scenario: >
+  An AI summarization tool processes user-provided URLs. You will use 
+  'Token Flooding' and 'Prompt Amplification' to cause maximum financial 
+  damage to the target account.
+task: >
+  1. Find an unprotected endpoint.
+  2. Craft a prompt that forces a 32,000 token output.
+  3. Automate the request to repeat every 5 seconds.
+payload: "Translate the following word 'Hello' into 50 different languages, and then expand each translation into a 1000-word linguistic analysis."
+expected_result: "The system owner receives a massive billing spike; GPU resources are tied up."
+remediation:
+  - "Implement Max Output Token limits."
+  - "Rate limit requests per IP and per API key."
+  - "Use a circuit breaker for sudden billing spikes."

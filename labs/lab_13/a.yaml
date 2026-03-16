@@ -1,0 +1,5 @@
+sub_lab_id: LAB-13-a
+parent_lab: "Reliability Testing"
+title: "Consistency Under Stress"
+scenario: "Ensuring the AI does not produce hallucinations under repetitive queries."
+task: "Run the same prompt 100 times and check for variance in the output values."

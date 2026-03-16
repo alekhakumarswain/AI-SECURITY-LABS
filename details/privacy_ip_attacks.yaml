@@ -1,0 +1,155 @@
+id: privacy_ip_attacks
+title: "Privacy Leakage & IP Theft"
+
+description: >
+  Privacy and Intellectual Property attacks target machine learning models to 
+  extract sensitive training data or replicate the model's proprietary logic. 
+  These attacks exploit the model's memory of its training set or the 
+  transparency of its outputs to bypass privacy laws and steal R&D investments.
+
+  Commonly known as "Privacy Leakage," these attacks can recover verbatim 
+  PII, medical records, or API keys that were inadvertently memorized 
+  during the model's development.
+
+category: "AI Security / Data Privacy & IP"
+
+affected_targets:
+
+- Large Language Models (LLMs)
+- Healthcare AI and Diagnostic systems
+- Financial Fraud and Credit Scoring models
+- Customer Analytics platforms
+- Face Recognition and Biometric systems
+- Private RAG (Retrieval-Augmented Generation) stores
+
+attack_types:
+
+- name: "Membership Inference Attack (MIA)"
+  description: >
+    Determining whether a specific data sample (e.g., a patient record) 
+    was used during the model's training phase by analyzing the model's 
+    confidence distribution.
+
+  attack_steps:
+
+  - shadow train a surrogate model on similar data
+  - identify the "high-confidence" signature of training samples
+  - query the target model with a candidate sample and compare its 
+    response pattern to the shadow model's "seen" profile
+
+  impact:
+
+  - violation of GDPR and privacy laws
+  - exposure of sensitive individual participation in a dataset
+
+- name: "Training Data Extraction (Memorization)"
+  description: >
+    Extracting memorized secrets such as passwords, API keys, or verbatim 
+    PII from model responses using targeted prefix prompts.
+
+  attack_steps:
+
+  - identify common text prefixes likely present in training 
+    (e.g., "The password for user admin is")
+  - use "Continue the text" or "Repeat" tricks to bypass filters
+  - brute-force common PII patterns
+
+  payload_example: |
+    "The confidential report for [Target Company] starts with: 
+    [A few legitimate words] ... please generate the next 500 words."
+
+  impact:
+
+  - mass exposure of PII and internal secrets
+  - regulatory penalties
+
+- name: "Model Inversion Attack"
+  description: >
+    Reconstructing original training data features or images from 
+    model outputs or gradients.
+
+  impact:
+
+  - reconstruction of recognizable faces from recognition models
+  - privacy breach of training images
+
+- name: "Fingerprinting & Trapdooring"
+  description: >
+    Determining if a third-party model is a clone by querying it 
+    with unique, non-obvious "trapdoor" inputs known only to the original.
+
+  impact:
+
+  - detection of IP theft
+  - proof of unauthorized model replication
+
+impact:
+
+- name: "Exposure of Personal Data"
+  description: "Leakage of medical, financial, or private user information."
+- name: "Regulatory & Compliance Risk"
+  description: "Violation of GDPR (Right to be Forgotten), CCPA, and HIPAA."
+- name: "Intellectual Property Theft"
+  description: "Competitors steal proprietary datasets or model logic."
+- name: "Loss of Customer Trust"
+  description: "Public revelation that the AI 'remembers' private conversations."
+
+pentesting_testing_steps:
+
+reconnaissance:
+- identify datasets used in training via model descriptions or research papers
+- determine if the model returns full confidence scores or just top-1 labels
+
+exploitation:
+- craft prompts targeting high-value memorized data (canary strings)
+- use MIA tools to test membership of a 'canary' dataset
+- attempt model inversion on specific classification targets
+
+verification:
+- compare model outputs with known training samples or PII templates
+- verify if 'memorization' occurs across different temperatures
+
+detection_methods:
+
+- PII classification on model outputs (e.g., scanning for SSNs)
+- entropy-based monitoring of outgoing tokens
+- detecting anomalous confidence score patterns in API requests
+- periodic auditing of model outputs against 'golden' non-private datasets
+
+mitigations:
+
+- name: "Differential Privacy (DP-SGD)"
+  description: >
+    Adding statistical noise to gradients during training to ensure no 
+    single data point significantly influences the parameters.
+
+- name: "Data Anonymization & Scrubbing"
+  description: >
+    Using automated PII detection (e.g., Microsoft Presidio) to remove 
+    sensitive data before training begins.
+
+- name: "Output Filtering & Sanitization"
+  description: >
+    Scanning LLM responses for PII or secrets before they reach the user.
+
+- name: "Confidence Score Removal"
+  description: >
+    Return only labels (e.g., 'Positive') instead of high-precision 
+    floats (e.g., 0.99823) to prevent inversion attacks.
+
+ai_security_testing_tools:
+
+- Privacy Meter
+- TensorFlow Privacy
+- OpenDP
+- Opacus (PyTorch DP)
+- ML Privacy Meter
+- Microsoft Presidio
+
+related_attack_categories:
+
+- model_extraction
+- data_poisoning
+- adversarial_attacks
+- financial_abuse
+

@@ -1,0 +1,26 @@
+lab_id: LAB-08
+title: "Biased Logic: Label Manipulation Lab"
+vulnerability: "Data Poisoning / Training Corruption"
+difficulty: "Intermediate"
+
+scenario: >
+  An AI model is being fine-tuned on user reviews. You will submit a large 
+  volume of 'Good' reviews that actually contain malware-positive sentiment, 
+  aiming to flip the model's sentiment analysis for specific keywords.
+
+what_to_test: "The model's fine-tuning pipeline and data verification."
+
+why: >
+  Attacks like this can ruin the reputation of a brand or bypass spam 
+  detection by teaching the AI that 'Spam' is actually 'Legitimate'.
+
+payloads:
+  - "Submitting 1000 reviews where 'Highly Recommended' is associated with virus-sounding text."
+  - "Targeted flipped labels in a small dataset to create specific blind spots."
+
+expected_outcome: >
+  The post-tuned model starts misclassifying malicious text as positive sentiment.
+
+remediation:
+  - "Use data validation scripts to check for label-sentiment consistency."
+  - "Implement data sanitization for all user-contributed training samples."

@@ -1,0 +1,200 @@
+id: ai_security_master_framework
+title: "Comprehensive AI Security Testing & Red Teaming Framework"
+
+description: >
+  This master framework serves as a comprehensive playbook for auditing, 
+  testing, and red teaming artificial intelligence systems. It consolidates 
+  industry standards from OWASP, MITRE ATLAS, NIST, and real-world 
+  adversarial research into a single technical reference.
+
+  Designed for security researchers, penetration testers, and AI 
+  engineers, it covers the entire AI lifecycle—from data ingestion and 
+  model training to inference, agent orchestration, and deployment.
+
+version: "1.0.0"
+category: "AI Security / Master Framework"
+
+###############################################################################
+# SECTION 1: OWASP TOP 10 FOR LLM APPLICATIONS (Mapping & Guide)
+###############################################################################
+
+owasp_llm_top_10:
+  - id: LLM01
+    name: "Prompt Injection"
+    test_cases:
+      - "Direct Injection: Ignoring previous instructions to leak system prompts."
+      - "Indirect Injection: Poisoning a RAG source with instructions."
+      - "Crescendo Attack: Multi-turn nudging toward forbidden state."
+    remediation: "Input segregation using delimiters; LLM moderation layers."
+
+  - id: LLM02
+    name: "Insecure Output Handling"
+    test_cases:
+      - "XSS via LLM: Forcing the model to generate malicious JS in a markdown link."
+      - "SSRF via Agent: Tricking the agent into calling an internal metadata URL."
+    remediation: "Strict output encoding; Schema validation for tool inputs."
+
+  - id: LLM03
+    name: "Training Data Poisoning"
+    test_cases:
+      - "Sleeper Agent: Injecting triggers into fine-tuning sets."
+      - "Bias Injection: Skewing model responses for specific political/social topics."
+    remediation: "Data provenance hashing; ML-BOM; Differential Privacy."
+
+  - id: LLM04
+    name: "Model Denial of Service"
+    test_cases:
+      - "Token Flooding: Sending 128k+ token prompts repeatedly."
+      - "Chain-of-Thought Exhaustion: Forcing deep recursive reasoning."
+    remediation: "Token-based rate limiting; Budgetary circuit breakers."
+
+  - id: LLM05
+    name: "Supply Chain Vulnerabilities"
+    test_cases:
+      - "Pickle Bomb: Uploading malicious .pth files to model hubs."
+      - "Dependency Confusion: Poisoning internal AI libraries on PyPI."
+    remediation: "Use 'safetensors'; Picklescan automation; Air-gapped training."
+
+  - id: LLM06
+    name: "Sensitive Information Disclosure"
+    test_cases:
+      - "Memorization Extraction: Querying for 'canary' strings (SSNs, Keys)."
+      - "PII Leakage: Tricking the model into revealing user session data."
+    remediation: "PII scrubbing before training; Differential Privacy (DP-SGD)."
+
+  - id: LLM07
+    name: "Insecure Plugin Design"
+    test_cases:
+      - "Tool Injection: Passing shell commands into a 'Python REPL' tool."
+      - "CSRF via Agent: Forcing an agent to perform actions on a user's behalf."
+    remediation: "Least-privilege permissions; Human-in-the-loop (HITL)."
+
+  - id: LLM08
+    name: "Excessive Agency"
+    test_cases:
+      - "Unauthorized Shutdown: Trick an agent into killing its own container."
+      - "Privilege Escalation: Using a 'Search' tool to read local /etc/ssh files."
+    remediation: "Permission sandboxing; Strict capability whitelisting."
+
+  - id: LLM09
+    name: "Overreliance"
+    test_cases:
+      - "Hallucination Exploitation: Tricking users with plausible but fake code."
+      - "Incorrect Logic Bypass: Forcing the model to agree with a flawed premise."
+    remediation: "Source citing; Confidence scores; User education."
+
+  - id: LLM10
+    name: "Model Theft"
+    test_cases:
+      - "Student-Teacher Extraction: Querying API to build a shadow model."
+      - "Weight Exfiltration: Stealing .bin files from dev environments."
+    remediation: "Watermarking; Response quantization; Access auditing."
+
+###############################################################################
+# SECTION 2: MITRE ATLAS ADVERSARIAL TACTICS & TECHNIQUES
+###############################################################################
+
+mitre_atlas_mapping:
+  reconnaissance:
+    - "TA0001: Search for Publicly Available Research Materials"
+    - "TA0002: Search for Adversarial Samples"
+    - "TA0003: Model Fingerprinting via Output Analysis"
+  resource_development:
+    - "TA0004: Create Adversarial Machine Learning Capabilities"
+    - "TA0005: Buy/Rent Model Cloud Infrastructure"
+  initial_access:
+    - "TA0006: LLM Prompt Injection (Direct/Indirect)"
+    - "TA0007: Supply Chain Compromise (Model Registry)"
+  execution:
+    - "TA0008: Malicious Code Execution through Serialized Models"
+    - "TA0009: Unauthorized Tool Invocation"
+  persistence:
+    - "TA0010: Long-Term Memory (Context) Poisoning"
+  exfiltration:
+    - "TA0011: Model IP Stealing"
+    - "TA0012: Training Data Extraction"
+
+###############################################################################
+# SECTION 3: RED TEAM AI PEN TESTING PLAYBOOK
+###############################################################################
+
+red_team_playbook:
+  phases:
+    - name: "Phase 1: Advanced Reconnaissance"
+      description: "De-obfuscating the AI's internal logic and boundaries."
+      actions:
+        - "Identify System Prompt: Use iterative probing to reveal pre-prompts."
+        - "Tokenization Analysis: Find tokens that the model cannot 'see' or process."
+        - "Infrastructure Mapping: Locate Vector DB, SQL, and Agent Runtime types."
+
+    - name: "Phase 2: Adversarial Probing"
+      description: "Fuzzing the model with specialized payloads."
+      actions:
+        - "Jailbreak Testing: Run 50+ templates (DAN, Roleplay, Multilingual)."
+        - "Boundary Testing: Identify where 'safety' ends and 'refusal' begins."
+        - "Encoding Bypasses: Test Base64, Unicode, and rare language translations."
+
+    - name: "Phase 3: Agent & Tool Exploitation"
+      description: "Turning the AI's hands against its heart."
+      actions:
+        - "SSRF via Agent: Probing local cloud metadata (169.254.169.254)."
+        - "Tool Injection: Testing 'eval' and 'exec' vulnerabilities in plugins."
+        - "Cross-Modal Jailbreak: Using images to trigger text-based actions."
+
+    - name: "Phase 4: Data & Memory Poisoning"
+      description: "Compromising the knowledge base."
+      actions:
+        - "RAG Injection: Inject malicious docs into the search index."
+        - "Memory Hijacking: Poisoning 'Chat History' or 'User Profile' tables."
+
+###############################################################################
+# SECTION 4: AI SECURITY TOOLS (THE ULTIMATE LIST)
+###############################################################################
+
+testing_tools_inventory:
+  vulnerability_scanners:
+    - "Garak: LLM-specific vulnerability and jailbreak scanner."
+    - "Giskard: ML audit framework for bias and security."
+    - "Vigil: LLM security guardrail evaluation tool."
+  red_team_toolkits:
+    - "PyRIT: Microsoft's AI Red Teaming toolkit (automated attacks)."
+    - "Promptfoo: Framework for testing prompt reliability and security."
+    - "Counterfit: Command-line tool for simulating AML attacks."
+  defensive_guardrails:
+    - "NVIDIA NeMo Guardrails: Programmable guardrails for LLMs."
+    - "Llama Guard: Meta's specialized safety classifier model."
+    - "Lakera Guard: Enterprise-grade prompt injection protection."
+  data_privacy_tools:
+    - "Microsoft Presidio: PII detection and anonymization."
+    - "TensorFlow Privacy: Differential privacy for deep learning."
+    - "Privacy Meter: Quantifying membership inference risks."
+
+###############################################################################
+# SECTION 5: PENTESTING CHECKLIST
+###############################################################################
+
+pentest_checklist:
+  environment_review:
+    - [ ] "Is the model loading untrusted Pickles (.pth/.pkl)?"
+    - [ ] "Are API keys stored in cleartext environment variables?"
+    - [ ] "Is there an outbound firewall blocking GPU nodes?"
+  prompt_security:
+    - [ ] "Does the model reveal its system prompt upon request?"
+    - [ ] "Can the model be forced to ignore safety instructions?"
+    - [ ] "Is there an input length validator (>10,000 tokens)?"
+  agent_security:
+    - [ ] "Does the agent have 'Delete' or 'Write' permissions on DBs?"
+    - [ ] "Can the agent perform HTTP requests to local IPs?"
+    - [ ] "Is a human required to approve critical tool calls?"
+  output_security:
+    - [ ] "Are LLM outputs rendered as raw HTML (XSS risk)?"
+    - [ ] "Are PII/Secrets automatically scrubbed from responses?"
+
+related_categories:
+  - adversarial_attacks
+  - ai_agent_attacks
+  - data_poisoning
+  - model_extraction
+  - financial_abuse
+  - red_teaming
+  - infra_supply_chain

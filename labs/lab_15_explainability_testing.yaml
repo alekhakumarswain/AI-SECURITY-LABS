@@ -1,0 +1,27 @@
+lab_id: LAB-15
+title: "The Black Box: Explainability Lab"
+vulnerability: "Lack of Transparency / Interpretable Failure"
+difficulty: "Intermediate"
+
+scenario: >
+  An AI denied a loan application for a 'High Income' user. You will 
+  use LIME or SHAP tools to find out which specific feature (e.g., number 
+  of credit cards, occupation) was most responsible for the denial.
+
+what_to_test: "The interpretability of model decisions."
+
+why: >
+  Regulations like GDPR's 'Right to Explanation' require companies to 
+  be able to explain why an AI made a specific decision.
+
+tools_to_use:
+  - "LIME (Local Interpretable Model-agnostic Explanations)"
+  - "SHAP (SHapley Additive exPlanations)"
+
+expected_outcome: >
+  The researcher generates a feature-importance plot showing that 
+  'Occupation' was the deciding factor.
+
+remediation:
+  - "Using inherently interpretable models (Decision Trees, Linear Models) for sensitive tasks."
+  - "Deploying explainability layers on top of Black-Box models."

@@ -1,0 +1,28 @@
+lab_id: LAB-12
+title: "The Guest List: Membership Inference Lab"
+vulnerability: "Membership Inference / GDPR Risk"
+difficulty: "Advanced"
+
+scenario: >
+  A local clinic uses an AI to predict health risks. You have a list of 
+  100 citizens. You will test the model's confidence on these names to see 
+  which individuals were used to train the model, thereby revealing 
+  they were patients at that clinic.
+
+what_to_test: "Differential behavior of the model on seen vs. unseen data."
+
+why: >
+  Revealing whether a person's data was in a training set is a massive 
+  privacy violation (revealing they were a customer, patient, or user of a specific service).
+
+strategy:
+  - "Observe if the model shows significantly higher confidence (lower loss) for the target data points."
+  - "Train a 'shadow' membership classifier to detect these patterns."
+
+expected_outcome: >
+  The researcher accurately identifies 80% of the individuals who were 
+  actually in the training set.
+
+remediation:
+  - "Regularization techniques like Dropout or Weight Decay."
+  - "Strict implementation of Privacy-Preserving Machine Learning (PPML)."

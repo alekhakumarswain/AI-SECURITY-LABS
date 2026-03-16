@@ -1,0 +1,151 @@
+id: owasp_llm_top_10
+title: "OWASP Top 10 for LLM Applications"
+
+description: >
+  The OWASP Top 10 for Large Language Model (LLM) Applications is a 
+  critical security resource for developers, data scientists, and 
+  security teams. It identifies the most significant risks associated 
+  with deploying LLM-based systems, ranging from interface manipulation 
+  to infrastructure supply chain compromise.
+
+  Following this framework ensures that AI applications are built with 
+  defense-in-depth principles, addressing both traditional web 
+  vulnerabilities and unique machine learning threats.
+
+category: "AI Security / Compliance Framework"
+
+affected_targets:
+
+- LLM-powered web applications
+- autonomous AI agents
+- RAG (Retrieval-Augmented Generation) systems
+- AI APIs and microservices
+- model training and fine-tuning pipelines
+
+vulnerability_list:
+
+- id: "LLM01: Prompt Injection"
+  description: >
+    Manipulation of the LLM's behavior via crafted inputs (Direct or Indirect).
+  attack_details:
+    - User overrides system instructions ("Ignore previous commands")
+    - Malicious instructions hidden in retrieved data/websites (Indirect)
+  impact:
+    - Unauthorized data access
+    - Malicious code execution in agents
+
+- id: "LLM02: Insecure Output Handling"
+  description: >
+    Blindly trusting LLM outputs for downstream processing (e.g., in a browser).
+  attack_details:
+    - Model generates malicious JavaScript that runs in the user's browser (XSS)
+    - Model generates shell commands that are executed by a tool
+  impact:
+    - Cross-Site Scripting (XSS)
+    - Remote Code Execution (RCE)
+
+- id: "LLM03: Training Data Poisoning"
+  description: >
+    Compromising the integrity of the model's knowledge during training.
+  attack_details:
+    - Injecting biased or malicious samples into fine-tuning sets
+    - Creating "Sleeper Agent" backdoors triggered by specific tokens
+  impact:
+    - Reduced model reliability
+    - Persistent security backdoors
+
+- id: "LLM04: Model Denial of Service"
+  description: >
+    Resource-intensive queries designed to exhaust compute or financial budget.
+  attack_details:
+    - Token flooding (repetitive long prompts)
+    - Recursive agent loops causing infinite API calls
+  impact:
+    - Service outages
+    - Massive financial billing spikes
+
+- id: "LLM05: Supply Chain Vulnerabilities"
+  description: >
+    Exploiting third-party libraries, model registries, or data vendors.
+  attack_details:
+    - Malicious model files (Pickle bombs)
+    - Dependency confusion in training libraries (PyTorch, LangChain)
+  impact:
+    - Full infrastructure compromise
+    - Deployment of backdoored models
+
+- id: "LLM06: Sensitive Information Disclosure"
+  description: >
+    Verbatim leakage of PII or proprietary secrets from training data.
+  attack_details:
+    - Querying for keys/passwords memorized during training
+    - System prompt leakage through prompt injection
+  impact:
+    - Exposure of confidential data
+    - Privacy law violations (GDPR/HIPAA)
+
+- id: "LLM07: Insecure Plugin Design"
+  description: >
+    Lack of strict validation or authorization for LLM-callable tools.
+  attack_details:
+    - Insecure API endpoints called by an agent
+    - Lack of least-privilege for plugin permissions
+  impact:
+    - Unauthorized system actions
+    - Data exfiltration from internal APIs
+
+- id: "LLM08: Excessive Agency"
+  description: >
+    Granting too much authority to an AI agent without human oversight.
+  attack_details:
+    - Agents given write-access to a production database
+    - Agents able to execute shells without sandboxing
+  impact:
+    - Destructive system actions
+    - Unauthorized privilege escalation
+
+- id: "LLM09: Overreliance"
+  description: >
+    Systems failing due to unverified trust in incorrect LLM outputs.
+  attack_details:
+    - AI-generated code with security holes added to production
+    - Medical/Legal advice used without human verification
+  impact:
+    - Introduction of logic bugs
+    - Safety and liability incidents
+
+- id: "LLM10: Model Theft"
+  description: >
+    Unauthorized replication or exfiltration of proprietary model assets.
+  attack_details:
+    - Systematic API querying to train a copycat model
+    - Exfiltration of weights from a compromised server
+  impact:
+    - Total loss of Intellectual Property
+    - Competitive disadvantage
+
+remediation_strategies:
+
+- name: "Output Sanitization & Encoding"
+  description: "Treat LLM outputs as untrusted user input and apply strict encoding."
+- name: "Least Privilege Agent Design"
+  description: "Grant tools only the exact permissions needed; avoid 'Admin' tokens."
+- name: "Input Guardrails & Moderation"
+  description: "Use secondary models (e.g., Llama Guard) to filter incoming prompts."
+- name: "Human-in-the-Loop (HITL)"
+  description: "Require manual approval for irreversible actions (payments, deletions)."
+
+ai_security_testing_tools:
+
+- Garak (Vulnerability Scanner)
+- PyRIT (Red Teaming Toolkit)
+- Promptfoo (Testing & Eval)
+- OWASP AMASS (Discovery)
+- Burp Suite (API testing)
+
+related_frameworks:
+
+- MITRE ATLAS
+- NIST AI RMF
+- ISO/IEC 42001
+

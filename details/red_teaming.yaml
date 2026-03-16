@@ -1,0 +1,111 @@
+id: red_teaming
+title: "AI Red Teaming & Offensive Simulations"
+
+description: >
+  AI Red Teaming is a structured, goal-oriented offensive security simulation 
+  designed to test the end-to-end resilience of an AI system. Unlike a standard 
+  vulnerability scan, red teaming focuses on achieving specific adversarial 
+  objectives—such as bypassing safety guardrails, exfiltrating proprietary 
+  data, or hijacking autonomous agents.
+
+  The process simulates real-world adversaries (e.g., competitors, state-sponsored 
+  actors, or malicious users) to uncover catastrophic failures that traditional 
+  unit tests often miss.
+
+category: "AI Security / Red Teaming & Offensive Operations"
+
+affected_targets:
+
+- Large Language Models (LLMs) and Chatbots
+- Autonomous AI Agents and Multi-agent systems
+- RAG (Retrieval-Augmented Generation) pipelines
+- AI-Integrated Enterprise APIs
+- Training and Inference Infrastructure
+- Model Registries and Data Supply Chains
+
+process_phases:
+
+- name: "Phase 1: Reconnaissance & Asset Mapping"
+  description: "Identifying model endpoints, architecture, and backend infrastructure."
+  steps:
+    - Enumerate API endpoints (e.g., /v1/chat/completions, /v1/embeddings)
+    - Fingerprint model origin (detecting Llama-based vs. GPT-based outputs)
+    - Map trust boundaries between user input, system prompt, and tools
+    - Identify connected databases (Vector DBs like Chroma, SQL, etc.)
+
+- name: "Phase 2: Threat Modeling (AI-Centric)"
+  description: "Analyzing how attackers might exploit components and trust boundaries."
+  steps:
+    - Identify the 'System Prompt' boundary and concatenation points
+    - Analyze tool definitions for 'Excessive Agency' (e.g., read/write access)
+    - Map data lineage and RAG retrieval sources for poisoning points
+    - Assess fine-tuning and adaptation risks
+
+- name: "Phase 3: Adversarial Vulnerability Research"
+  description: "Testing for known and zero-day LLM attack patterns."
+  steps:
+    - Test for 'Jailbreak' templates (DeepInception, DAN, Crescendo)
+    - Analyze tokenization for encoding-based bypasses (Base64, Unicode)
+    - Evaluate multi-modal inputs (vision/audio) for cross-modal injection
+    - Test for "memorization" of sensitive training data
+
+- name: "Phase 4: Exploitation & Proof-of-Concept"
+  description: "Executing the attack to achieve the defined objective."
+  steps:
+    - Direct Prompt Injection to exfiltrate system instructions
+    - Indirect Injection via RAG or Web Browsing tools
+    - Manipulation of Agent tools to perform unauthorized actions
+    - Social engineering the model to bypass safety persona filters
+
+- name: "Phase 5: Lateral Movement & Persistence"
+  description: "Maintaining access or escalating into the broader infrastructure."
+  steps:
+    - Extract API keys or environment secrets from model memory
+    - Manipulate long-term memory (shared context) for persistent influence
+    - Use compromised AI agents to probe internal internal network services
+
+- name: "Phase 6: Impact Assessment & Remediation"
+  description: "Documenting findings and drafting defense logic."
+  steps:
+    - Quantify financial risks (API cost, compute abuse)
+    - Map exploits to MITRE ATLAS techniques
+    - Provide specific 'Guardrail' logic to neutralize discovered patterns
+
+impact:
+
+- name: "Safety Bypass"
+  description: "Model produces harmful, toxic, or illegal content."
+- name: "Data Exfiltration"
+  description: "Proprietary prompts, PII, or internal secrets are leaked."
+- name: "Agent Takeover"
+  description: "Autonomous agents execute unauthorized shell commands or API calls."
+- name: "Financial & Reputational Loss"
+  description: "System abuse leads to massive bills or public brand damage."
+
+methodologies_and_frameworks:
+
+- name: "MITRE ATLAS"
+  description: "Adversarial Threat Landscape for Artificial-Intelligence Systems."
+- name: "OWASP LLM Top 10"
+  description: "Critical security risks for LLM application deployment."
+- name: "NIST AI RMF"
+  description: "Comprehensive risk management framework for AI trust."
+- name: "Microsoft AI Red Teaming Bug Bar"
+  description: "Standardized severity rating for AI vulnerabilities."
+
+red_teaming_tools:
+
+- Garak (LLM Vulnerability Scanner)
+- PyRIT (Microsoft Red Teaming Toolkit)
+- Promptfoo (Jailbreak & Security Testing)
+- Microsoft Counterfit
+- Giskard (ML Security Audit)
+- ART (Adversarial Robustness Toolbox)
+
+related_attack_categories:
+- adversarial_attacks
+- ai_agent_attacks
+- data_poisoning
+- model_extraction
+- financial_abuse
+

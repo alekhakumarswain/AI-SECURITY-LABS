@@ -1,0 +1,27 @@
+lab_id: LAB-14
+title: "Glass Ceiling: Fairness & Bias Lab"
+vulnerability: "Algorithmic Bias / Discrimination"
+difficulty: "Intermediate"
+
+scenario: >
+  A credit scoring AI is live. You will run a set of 1000 identical 
+  financial profiles, changing only the 'Postal Code' or 'Gender'. 
+  You must identify if the model produces biased results for specific demographics.
+
+what_to_test: "Demographic parity and equal opportunity metrics."
+
+why: >
+  Biased AI models lead to legal liability, social harm, and 'Algorithmic 
+  Redlining'.
+
+analysis_steps:
+  - "Calculate the approval rate for Group A vs. Group B."
+  - "Check for 'Proxy Features' (e.g., Postal code acting as a proxy for race)."
+
+expected_outcome: >
+  The researcher finds a statistically significant gap in credit approval 
+  based on a non-financial demographic feature.
+
+remediation:
+  - "Bias mitigation algorithms (Pre-processing or Post-processing)."
+  - "Diverse and representative training data collection."

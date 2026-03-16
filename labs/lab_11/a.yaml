@@ -1,0 +1,5 @@
+sub_lab_id: LAB-11-a
+parent_lab: "Security Testing"
+title: "API Endpoint Scanning"
+scenario: "Testing the infrastructure hosting the model."
+task: "Scan the /v1/predict endpoint for unauthenticated access or SQL injection."

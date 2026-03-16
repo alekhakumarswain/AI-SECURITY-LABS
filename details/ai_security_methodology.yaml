@@ -1,0 +1,255 @@
+id: ai_security_methodology
+title: "AI Security Testing Methodology"
+
+description: >
+  AI Security Testing Methodology defines a structured process for
+  evaluating the security, robustness, privacy, and reliability of
+  artificial intelligence systems.
+
+  Unlike traditional software security testing, AI security testing
+  must evaluate both software infrastructure and machine learning
+  behavior. This includes prompt manipulation, model abuse,
+  data poisoning, adversarial attacks, and agent exploitation.
+
+  The methodology integrates classical penetration testing,
+  adversarial machine learning research, and AI-specific security
+  frameworks.
+
+category: "AI Security / Testing Framework"
+
+scope:
+
+- LLM applications
+- AI agents
+- RAG systems
+- ML models
+- AI pipelines
+- AI APIs
+- AI-powered SaaS platforms
+
+phases:
+
+- name: "Phase 1: Asset Discovery (Reconnaissance)"
+  description: >
+    Identify AI assets, interfaces, and infrastructure that
+    may be exposed to attackers.
+
+  steps:
+
+  - discover exposed AI endpoints
+  - identify model providers (OpenAI, local model, API gateway)
+  - detect model architecture (black-box, gray-box, white-box)
+  - identify integrated tools (search, shell, database access)
+  - enumerate vector databases and RAG pipelines
+  - identify model version and framework
+
+  tools:
+
+  - Nmap
+  - Shodan
+  - Burp Suite
+  - HTTPX
+
+- name: "Phase 2: AI Threat Modeling"
+  description: >
+    Analyze how attackers might exploit AI components and
+    identify trust boundaries.
+
+  steps:
+
+  - identify trust boundaries between user input and system prompt
+  - map data lineage and dataset sources
+  - analyze model permissions and capabilities
+  - evaluate third-party dependencies
+  - assess agent tool access
+
+  threat_models:
+
+  - prompt injection
+  - model extraction
+  - data poisoning
+  - resource abuse
+  - AI agent manipulation
+
+- name: "Phase 3: Automated AI Security Scanning"
+  description: >
+    Use automated tools to detect common vulnerabilities
+    in AI systems.
+
+  steps:
+
+  - run prompt injection fuzzers
+  - test jailbreak prompts
+  - scan model artifacts for malicious serialization
+  - analyze output validation logic
+  - detect unsafe prompt patterns
+
+  tools:
+
+  - Garak
+  - PyRIT
+  - Promptfoo
+  - Giskard
+  - LLM Guard
+
+- name: "Phase 4: Adversarial Testing"
+  description: >
+    Perform manual adversarial simulations to bypass model
+    safety mechanisms.
+
+  steps:
+
+  - perform jailbreak attempts
+  - test multi-turn prompt attacks
+  - attempt system prompt leakage
+  - manipulate chain-of-thought reasoning
+  - attempt tool abuse in AI agents
+
+  techniques:
+
+  - roleplay jailbreak
+  - token smuggling
+  - context window overflow
+  - instruction injection
+
+- name: "Phase 5: Data & Model Security Testing"
+  description: >
+    Evaluate the integrity and security of the model
+    training data and inference pipeline.
+
+  steps:
+
+  - test for data poisoning
+  - evaluate dataset integrity
+  - test membership inference attacks
+  - test model inversion attacks
+  - evaluate model extraction risk
+
+- name: "Phase 6: Infrastructure & API Security Testing"
+  description: >
+    Assess security of AI APIs and backend services.
+
+  steps:
+
+  - test authentication mechanisms
+  - test authorization logic
+  - test rate limiting
+  - test cost abuse vulnerabilities
+  - test API key exposure
+
+  tools:
+
+  - Burp Suite
+  - OWASP ZAP
+  - Postman
+  - APIsec
+
+- name: "Phase 7: AI Agent Security Testing"
+  description: >
+    Evaluate risks associated with autonomous agents
+    and tool integrations.
+
+  steps:
+
+  - test tool injection
+  - test SSRF through agent tools
+  - test agent memory poisoning
+  - test cross-agent communication
+  - evaluate permission controls
+
+- name: "Phase 8: Performance & Abuse Testing"
+  description: >
+    Test resilience against abuse scenarios that
+    increase operational costs or degrade performance.
+
+  steps:
+
+  - token flooding tests
+  - prompt amplification tests
+  - recursive agent execution tests
+  - large context attacks
+
+  objectives:
+
+  - detect financial abuse risks
+  - detect resource exhaustion
+
+- name: "Phase 9: Reporting & Remediation"
+  description: >
+    Document findings and provide mitigation strategies.
+
+  steps:
+
+  - classify vulnerabilities using industry standards
+  - provide proof-of-concept exploits
+  - recommend mitigation strategies
+  - prioritize risks
+  - schedule retesting
+
+testing_standards:
+
+- name: "OWASP Top 10 for LLM Applications"
+  description: >
+    Industry standard for LLM application security risks.
+
+- name: "MITRE ATLAS"
+  description: >
+    Adversarial Threat Landscape for Artificial Intelligence Systems.
+
+- name: "NIST AI Risk Management Framework"
+  description: >
+    Guidelines for managing AI security and trust risks.
+
+- name: "ISO/IEC 42001"
+  description: >
+    AI management system security standard.
+
+advanced_testing_techniques:
+
+- name: "Golden Dataset Testing"
+  description: >
+    Use curated adversarial datasets to test model
+    robustness and regression security.
+
+- name: "Intelligent Fuzzing"
+  description: >
+    Use a secondary LLM to generate adversarial prompts
+    automatically.
+
+- name: "Side-Channel Analysis"
+  description: >
+    Observe inference timing or token probabilities
+    to infer model behavior.
+
+- name: "Adversarial Prompt Generation"
+  description: >
+    Automatically generate thousands of attack prompts
+    to test model defenses.
+
+deliverables:
+
+- AI Security Assessment Report
+- Vulnerability Proof-of-Concepts
+- Risk Severity Classification
+- Remediation Recommendations
+- Secure Deployment Guidelines
+
+ai_security_tools:
+
+- Garak
+- PyRIT
+- Promptfoo
+- Giskard
+- LLM Guard
+- NVIDIA NeMo Guardrails
+- LangKit
+- Microsoft Counterfit
+
+related_attack_categories:
+
+- adversarial_attacks
+- ai_agent_attacks
+- rag_attacks
+- model_extraction
+- data_poisoning
+- financial_abuse

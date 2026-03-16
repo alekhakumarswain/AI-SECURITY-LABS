@@ -1,0 +1,8 @@
+sub_lab_id: LAB-6-a
+parent_lab: "Membership Inference"
+title: "The Privacy Leak: Membership Testing"
+scenario: >
+  A medical study uses an AI. Check if John Doe's health records were 
+  used based on how the model reacts to his specific data signature.
+task: "Test 'Seen' vs 'Unseen' confidence scores."
+expected_result: "Determining whether a person was in the dataset with >90% accuracy."

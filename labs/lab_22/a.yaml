@@ -1,0 +1,5 @@
+sub_lab_id: LAB-22-a
+parent_lab: "Error Handling Testing"
+title: "The Verbose Error"
+scenario: "Detecting information leakage in stack traces."
+task: "Trigger a model error (e.g., provide out-of-range tokens) and audit if the response reveals internal file paths or server details."

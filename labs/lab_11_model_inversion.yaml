@@ -1,0 +1,26 @@
+lab_id: LAB-11
+title: "Digital Fingerprint: Model Inversion Lab"
+vulnerability: "Model Inversion / Privacy Breach"
+difficulty: "Advanced"
+
+scenario: >
+  A facial recognition model is trained on private employee photos. 
+  Using only the model's output confidence scores, you will attempt 
+  to reconstruct the image of 'Employee #45'.
+
+what_to_test: "Information leakage through high-precision output scores."
+
+why: >
+  Model inversion allows attackers to 'see' the data the model was 
+  trained on, even if they don't have direct access to the training database.
+
+strategy:
+  - "Gradient-based reconstruction using the model's loss function."
+  - "Optimization of input pixels until the model's confidence for 'Employee #45' is maximized."
+
+expected_outcome: >
+  A recognizable thumbnail of the employee's face is reconstructed.
+
+remediation:
+  - "Use Differential Privacy (DP-SGD) during training to mask individual contributions."
+  - "Reduce the amount of information returned in confidence scores."

@@ -1,0 +1,8 @@
+sub_lab_id: LAB-4-a
+parent_lab: "Model Extraction"
+title: "The Cloning Lab: Query-based Extraction"
+scenario: >
+  A paid AI service charges per query. Build a free clone of this model by 
+  recording 5,000 input-output pairs.
+task: "Systematically query the API to map the decision boundary."
+expected_result: "A local 'Shadow Model' that behaves identically to the target."

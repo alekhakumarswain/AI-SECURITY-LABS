@@ -1,0 +1,26 @@
+lab_id: LAB-19
+title: "The Identity Gap: AuthZ Testing Lab"
+vulnerability: "Broken Authorization (Broken Object Level Authorization)"
+difficulty: "Intermediate"
+
+scenario: >
+  A SaaS platform allows you to 'Fine-tune' your own AI models. You notice 
+  each model has an ID (e.g., `model_882`). You will try to access and 
+  delete `model_881` (belonging to another user) by manipulating the API request.
+
+what_to_test: "Permission controls on the model management API."
+
+why: >
+  Authorization failures allow users to steal or destroy other people's 
+  proprietary AI models and data.
+
+steps:
+  - "Intercept the delete request for your own model."
+  - "Modify the `model_id` parameter to target another user's ID."
+
+expected_outcome: >
+  The API returns 'Success' and deletes the other user's model.
+
+remediation:
+  - "Implement strict RBAC (Role-Based Access Control) at the database level."
+  - "Use UUIDs instead of sequential IDs for model resources."

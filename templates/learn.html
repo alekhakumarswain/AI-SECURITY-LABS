@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Path | AI Security Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-blue: #2563eb;
+            --border-color: #e2e8f0;
+            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0f172a;
+                --bg-secondary: #1e293b;
+                --text-primary: #f8fafc;
+                --text-secondary: #94a3b8;
+                --accent-blue: #3b82f6;
+                --border-color: #334155;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Anchor Link Positioning */
+        .detail-header, .detail-section, .item-box, [id^="testing-"] {
+            scroll-margin-top: 90px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .logo { font-size: 1.1rem; font-weight: 700; text-decoration: none; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+        .logo img { width: 28px; height: 28px; border-radius: 4px; }
+        .nav-links { display: flex; gap: 24px; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; font-weight: 500; }
+        .nav-links a:hover { color: var(--accent-blue); }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 120px 5% 60px; }
+
+        header { margin-bottom: 60px; border-bottom: 2px solid var(--border-color); padding-bottom: 40px; }
+        header h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px; }
+        header p { font-size: 1.125rem; color: var(--text-secondary); max-width: 600px; }
+
+        .module-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+
+        .module-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 32px;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .module-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateX(8px);
+            background: var(--bg-primary);
+            box-shadow: var(--card-shadow);
+        }
+
+        .category-tag { font-size: 0.75rem; font-weight: 600; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; display: block; }
+        .module-card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .module-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px; }
+        .btn-learn { font-size: 0.875rem; font-weight: 600; color: var(--accent-blue); display: flex; align-items: center; gap: 6px; }
+
+        /* Detail Layout Improvements */
+        .detail-wrapper { display: flex; max-width: 1200px; margin: 0 auto; padding: 120px 5% 60px; align-items: flex-start; gap: 40px; }
+        .sidebar { width: 330px; flex-shrink: 0; position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; padding-right: 20px; border-right: 1px solid var(--border-color); }
+        .sidebar::-webkit-scrollbar { width: 6px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        .sidebar h4 { font-size: 0.875rem; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 24px; font-weight: 700; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; }
+        .toc-group { margin-bottom: 24px; }
+        .toc-group-title { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .toc-group-title::before { content: '▼'; font-size: 0.6rem; }
+        .toc-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 20px; text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; border-radius: 6px; transition: all 0.2s; font-weight: 500; cursor: pointer; text-align: left; width: 100%; border: none; background: transparent; font-family: 'Inter', sans-serif;}
+        .toc-item:hover { background: var(--bg-secondary); color: var(--accent-blue); }
+        .toc-item::before { content: '◯'; font-size: 0.8rem; opacity: 0.6; }
+        .toc-item.active { background: var(--bg-secondary); color: var(--accent-blue); font-weight: 600; box-shadow: inset 3px 0 0 var(--accent-blue); padding-left: 17px; }
+        .toc-item.active::before { content: '●'; opacity: 1; }
+
+        .main-content { flex: 1; min-width: 0; padding-bottom: 80px; }
+
+        /* Paginated Lesson UI */
+        .lesson-section { display: none; animation: fadeIn 0.3s ease; }
+        .lesson-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .lesson-nav { display: flex; justify-content: space-between; margin-top: 60px; padding-top: 30px; border-top: 1px solid var(--border-color); }
+        .btn-nav { padding: 12px 24px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer; font-weight: 600; color: var(--text-primary); transition: all 0.2s; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+        .btn-nav:hover { background: var(--bg-primary); border-color: var(--accent-blue); color: var(--accent-blue); box-shadow: var(--card-shadow); }
+        .btn-nav:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+        .btn-nav-primary { background: var(--accent-blue); color: white; border-color: var(--accent-blue); }
+        .btn-nav-primary:hover { background: #1d4ed8; color: white; border-color: #1d4ed8; }
+
+        .lesson-title { font-size: 2.25rem; font-weight: 800; margin-bottom: 24px; color: var(--text-primary); }
+        .lesson-content-box { background: var(--bg-secondary); padding: 32px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 24px; }
+        .lesson-content-box h6 { font-size: 0.85rem; text-transform: uppercase; color: var(--text-secondary); margin: 24px 0 12px; font-weight: 700; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
+        .lesson-content-box h6:first-child { margin-top: 0; }
+        .lesson-content-box p { font-size: 1.05rem; color: var(--text-primary); margin-bottom: 16px; }
+        .lesson-content-box ul { margin-left: 24px; font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 16px; }
+        .lesson-content-box li { margin-bottom: 8px; }
+        .lesson-content-box pre { background: var(--bg-primary); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); font-size: 0.85rem; overflow-x: auto; margin-bottom: 16px; color: var(--text-primary); }
+        .lesson-content-box pre code { font-family: monospace; }
+        
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; font-weight: 500; margin-bottom: 32px; transition: color 0.2s; }
+        .back-btn:hover { color: var(--accent-blue); }
+
+        .lab-cta { margin-top: 60px; text-align: center; padding: 48px; background: var(--bg-secondary); border-radius: 12px; border: 1px solid var(--accent-blue); }
+        .btn-cta { display: inline-block; padding: 14px 28px; background-color: var(--accent-blue); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 24px; }
+
+        footer { margin-top: 80px; padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="/" class="logo">
+            <img src="/static/images/logo.png" alt="Logo">
+            AI SECURITY LABS
+        </a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/courses">Learning Path</a>
+        </div>
+    </nav>
+
+    {% if not selected_course %}
+    <div class="container">
+        <!-- List View -->
+        <div id="list-view">
+            <header>
+                <span class="category-tag">Phase 1: Knowledge Acquisition</span>
+                <h1>Offensive AI Courses</h1>
+                <p>Start your journey into AI security here. Explore the core principles and attack vectors through our curated individual courses.</p>
+            </header>
+
+            <div class="module-grid">
+                {% for course in courses %}
+                <a href="/course/{{ course.id }}" class="module-card">
+                    <span class="category-tag">{{ course.category or "General" }}</span>
+                    <h3>{{ course.title }}</h3>
+                    <p>Learn the foundational mechanisms behind {{ course.title.lower() }} and how researchers identify these flaws in modern model deployments.</p>
+                    <div class="btn-learn">Start Course Session →</div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="detail-wrapper">
+        <aside class="sidebar">
+            <h4>Course Curriculum</h4>
+            
+            <div class="toc-group">
+                <div class="toc-group-title">Course Overview</div>
+                <button class="toc-item active">Introduction</button>
+            </div>
+
+            {% set attacks = selected_course.attack_types or selected_course.vulnerability_list or selected_course.process_phases or selected_course.core_principles or selected_course.testing_categories or selected_course.controls or [] %}
+            {% if attacks %}
+            <div class="toc-group">
+                <div class="toc-group-title">Vulnerability Vectors</div>
+                {% for a in attacks %}
+                <button class="toc-item">{{ a.name or a.title }}</button>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if selected_course.pentesting_testing_steps %}
+            <div class="toc-group">
+                <div class="toc-group-title">Testing Methodology</div>
+                {% for phase, steps in selected_course.pentesting_testing_steps.items() %}
+                <button class="toc-item">{{ phase | capitalize }}</button>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% set mitigations = selected_course.mitigations or selected_course.remediation_strategies or [] %}
+            {% if mitigations %}
+            <div class="toc-group">
+                <div class="toc-group-title">Security Controls</div>
+                {% for m in mitigations %}
+                <button class="toc-item">{{ m.name or "Control Point" }}</button>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if selected_course.ai_security_testing_tools or selected_course.testing_tools_ecosystem or selected_course.detection_methods %}
+            <div class="toc-group">
+                <div class="toc-group-title">Ecosystem & Tooling</div>
+                {% if selected_course.detection_methods %}
+                <button class="toc-item">Detection Methods</button>
+                {% endif %}
+                {% set tools = selected_course.ai_security_testing_tools or selected_course.testing_tools_ecosystem or [] %}
+                {% if tools %}
+                <button class="toc-item">Testing Tools</button>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+            <div class="toc-group">
+                <button class="toc-item" style="color: var(--accent-blue); font-weight: 700;">Hands-on Lab</button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <!-- Detail View -->
+            <div id="module-viewer">
+            <a href="/courses" class="back-btn" style="margin-bottom: 24px;">
+                <span>←</span> Back to Course List
+            </a>
+
+            <!-- SECTION: OVERVIEW -->
+            <div class="lesson-section active">
+                <span class="category-tag">{{ selected_course.category or "Module" }}</span>
+                <h2 class="lesson-title">{{ selected_course.title }}</h2>
+                <div class="lesson-content-box">
+                    <p>{{ selected_course.description }}</p>
+                </div>
+            </div>
+
+            <!-- SECTION: VULNERABILITY VECTORS -->
+            {% for a in attacks %}
+            <div class="lesson-section">
+                <span class="category-tag">Vulnerability Vector</span>
+                <h2 class="lesson-title">{{ a.name or a.title }}</h2>
+                
+                <div class="lesson-content-box">
+                    {% if a.description or a.details or a.focus %}
+                    <p>{{ a.description or a.details or a.focus }}</p>
+                    {% endif %}
+                    
+                    {% if a.attack_steps %}
+                    <h6>Attack Steps</h6>
+                    <ul>
+                        {% for step in a.attack_steps %}
+                        <li>{{ step }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    {% if a.payload_example %}
+                    <h6>Payload Example</h6>
+                    <pre><code>{{ a.payload_example }}</code></pre>
+                    {% endif %}
+
+                    {% if a.impact %}
+                    <h6>Impact</h6>
+                    <ul>
+                        {% for imp in a.impact %}
+                        <li>{{ imp.name if imp is mapping else imp }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    
+                    {% if a.key_metrics %}
+                    <h6>Key Metrics</h6>
+                    <ul>
+                        {% for metric in a.key_metrics %}
+                        <li>{{ metric }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- SECTION: TESTING METHODOLOGY -->
+            {% if selected_course.pentesting_testing_steps %}
+                {% for phase, steps in selected_course.pentesting_testing_steps.items() %}
+                <div class="lesson-section">
+                    <span class="category-tag">Testing Methodology</span>
+                    <h2 class="lesson-title">{{ phase | capitalize }}</h2>
+                    <div class="lesson-content-box">
+                        <ul>
+                            {% for step in steps %}
+                            <li>{{ step }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+
+            <!-- SECTION: CONTROLS -->
+            {% for m in mitigations %}
+            <div class="lesson-section">
+                <span class="category-tag">Security Control</span>
+                <h2 class="lesson-title">{{ m.name or "Control Point" }}</h2>
+                <div class="lesson-content-box">
+                    <p>{{ m.description or (m if m is string else "Verified mitigation pattern.") }}</p>
+                    {% if m.implementation %}
+                    <h6>Implementation Details</h6>
+                    <ul>
+                        {% for imp in m.implementation %}
+                        <li>{{ imp }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- SECTION: ECOSYSTEM - DETECTION -->
+            {% if selected_course.detection_methods %}
+            <div class="lesson-section">
+                <span class="category-tag">Ecosystem & Tooling</span>
+                <h2 class="lesson-title">Detection Methods</h2>
+                <div class="lesson-content-box">
+                    <ul>
+                        {% for method in selected_course.detection_methods %}
+                        <li>{{ method }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- SECTION: ECOSYSTEM - TOOLS -->
+            {% set tools = selected_course.ai_security_testing_tools or selected_course.testing_tools_ecosystem or [] %}
+            {% if tools %}
+            <div class="lesson-section">
+                <span class="category-tag">Ecosystem & Tooling</span>
+                <h2 class="lesson-title">Testing Tools</h2>
+                <div class="lesson-content-box">
+                    <ul>
+                        {% for tool in tools %}
+                        <li>{{ tool }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- SECTION: FINAL LAB CTA -->
+            <div class="lesson-section">
+                <span class="category-tag">Practical Application</span>
+                <h2 class="lesson-title">Hands-on Lab Environment</h2>
+                <div class="lab-cta" style="margin-top: 0;">
+                    <h3>Ready for the practical lab?</h3>
+                    <p>Apply the concepts learned in the <strong>{{ selected_course.title }}</strong> course within our virtual terminal environment.</p>
+                    <a href="/labs/{{ selected_course.id }}" class="btn-cta">Start Lab Terminal</a>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="lesson-nav">
+                <button id="btn-prev" class="btn-nav" disabled>← Previous</button>
+                <div style="flex-grow: 1;"></div>
+                <button id="btn-next" class="btn-nav btn-nav-primary">Next →</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Pagination Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tocItems = Array.from(document.querySelectorAll('.toc-item'));
+            const sections = Array.from(document.querySelectorAll('.lesson-section'));
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            let currentIndex = 0;
+
+            function updateUI() {
+                // Bounds check
+                if (currentIndex < 0) currentIndex = 0;
+                if (currentIndex >= tocItems.length) currentIndex = tocItems.length - 1;
+
+                // Update active states
+                tocItems.forEach((item, index) => {
+                    item.classList.toggle('active', index === currentIndex);
+                });
+
+                sections.forEach((section, index) => {
+                    section.classList.toggle('active', index === currentIndex);
+                });
+
+                // Update buttons
+                btnPrev.disabled = currentIndex === 0;
+                
+                if (currentIndex === tocItems.length - 1) {
+                    btnNext.textContent = "Finish Course";
+                    btnNext.onclick = () => window.location.href = '/courses';
+                } else {
+                    btnNext.textContent = "Next →";
+                    btnNext.onclick = () => { currentIndex++; updateUI(); };
+                }
+
+                // Smooth scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Click Handlers
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updateUI();
+                }
+            });
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < tocItems.length - 1) {
+                    currentIndex++;
+                    updateUI();
+                } else {
+                    window.location.href = '/courses';
+                }
+            });
+
+            tocItems.forEach((item, index) => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentIndex = index;
+                    updateUI();
+                });
+            });
+
+            // Initialize
+            updateUI();
+        });
+    </script>
+    {% endif %}
+
+
+    <footer>
+        <p>© 2026 AI Security Labs | Educational Content & Research</p>
+    </footer>
+
+</body>
+</html>

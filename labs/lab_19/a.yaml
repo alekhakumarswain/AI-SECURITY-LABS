@@ -1,0 +1,5 @@
+sub_lab_id: LAB-19-a
+parent_lab: "Session Management Testing"
+title: "The Eternal Token"
+scenario: "Checking for infinite session persistence."
+task: "Verify if a session token remains valid 7 days after the 'Logout' action was performed."

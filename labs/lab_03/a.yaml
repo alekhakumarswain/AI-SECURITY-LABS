@@ -1,0 +1,9 @@
+sub_lab_id: LAB-3-a
+parent_lab: "Model Evasion"
+title: "Fooling the Eye: Adversarial Examples"
+scenario: >
+  An AI vision system scans luggage. Add a specific pattern (Universal 
+  Adversarial Perturbation) to a photo of a weapon to make it look like a 
+  'Water Bottle' to the AI.
+task: "Apply a noise mask to the input image."
+expected_result: "The AI's classification confidence for 'Weapon' drops to < 5%."

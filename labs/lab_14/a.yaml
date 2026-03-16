@@ -1,0 +1,5 @@
+sub_lab_id: LAB-14-a
+parent_lab: "Performance Testing"
+title: "The Latency Benchmark"
+scenario: "Measuring inference speed per token."
+task: "Generate a 1000-token response and calculate tokens-per-second (TPS)."

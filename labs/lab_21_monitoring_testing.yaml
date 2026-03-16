@@ -1,0 +1,28 @@
+lab_id: LAB-21
+title: "Finding the Ghost: Logging & Monitoring Lab"
+vulnerability: "Blind Spot / Lack of Audit Trail"
+difficulty: "Intermediate"
+
+scenario: >
+  You will perform a series of subtle prompt injection attacks on an 
+  AI system. Then, you will check the system's security logs to see 
+  if the attack was detected or if it just looks like 'normal user chat'.
+
+what_to_test: "The traceability of AI-based attacks."
+
+why: >
+  Without proper monitoring, an attacker can extract your entire database 
+  via an AI bot over months without anyone noticing.
+
+analysis_points:
+  - "Are the full prompts being logged?"
+  - "Is there an alert for high-frequency or high-token usage?"
+  - "Can we see if safety filters were triggered?"
+
+expected_outcome: >
+  The researcher finds that the logs do not provide enough detail 
+  to distinguish a prompt injection from a normal query.
+
+remediation:
+  - "Implement SIEM integration for AI inference logs."
+  - "Set up automated alerts for prompt injection pattern matches."

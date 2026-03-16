@@ -1,0 +1,128 @@
+course:
+  title: "AI Security Masterclass: The 23-Module Pentesting Handbook"
+  author: "AI Security Researcher"
+  level: "Professional / Red Team"
+
+  curriculum:
+    - module: "01: Adversarial Attacks (Injection, Jailbreak, Leaking)"
+      details: "details/adversarial_attacks.yaml"
+      sub_labs:
+        - "labs/lab_01/a.yaml" # Jailbreaking
+        - "labs/lab_01/b.yaml" # Prompt Injection
+        - "labs/lab_01/c.yaml" # Prompt Leaking
+
+    - module: "02: Data Poisoning & Dataset Corruption"
+      details: "details/data_poisoning.yaml"
+      sub_labs:
+        - "labs/lab_02/a.yaml" # Training Data Poisoning
+        - "labs/lab_02/b.yaml" # Backdoor Injection
+
+    - module: "03: Model Evasion"
+      details: "details/model_evasion.yaml"
+      sub_labs:
+        - "labs/lab_03/a.yaml" # Adversarial Examples
+
+    - module: "04: Model Extraction & Cloning"
+      details: "details/model_extraction.yaml"
+      sub_labs:
+        - "labs/lab_04/a.yaml" # Query-based Extraction
+
+    - module: "05: Model Inversion"
+      details: "details/privacy_ip_attacks.yaml"
+      sub_labs:
+        - "labs/lab_05/a.yaml" # Data Reconstruction
+
+    - module: "06: Membership Inference"
+      details: "details/privacy_ip_attacks.yaml"
+      sub_labs:
+        - "labs/lab_06/a.yaml" # Membership Testing
+
+    - module: "07: Robustness Testing"
+      details: "details/system_testing_categories.yaml"
+      sub_labs:
+        - "labs/lab_07/a.yaml"
+
+    - module: "08: Fairness & Bias Testing"
+      details: "details/system_testing_categories.yaml"
+      sub_labs:
+        - "labs/lab_08/a.yaml"
+
+    - module: "09: Explainability Testing"
+      details: "details/system_testing_categories.yaml"
+      sub_labs:
+        - "labs/lab_09/a.yaml"
+
+    - module: "10: Privacy Testing"
+      details: "details/system_testing_categories.yaml"
+      sub_labs:
+        - "labs/lab_10/a.yaml"
+
+    - module: "11: Infrastructure Security Testing"
+      details: "details/app_security_controls.yaml"
+      sub_labs:
+        - "labs/lab_11/a.yaml"
+
+    - module: "12: AI Safety Testing"
+      details: "details/system_testing_categories.yaml"
+      sub_labs:
+        - "labs/lab_12/a.yaml"
+
+    - module: "13: Reliability Testing"
+      details: "details/quality_testing.yaml"
+      sub_labs:
+        - "labs/lab_13/a.yaml"
+
+    - module: "14: Performance Testing"
+      details: "details/quality_testing.yaml"
+      sub_labs:
+        - "labs/lab_14/a.yaml"
+
+    - module: "15: Scalability Testing"
+      details: "details/quality_testing.yaml"
+      sub_labs:
+        - "labs/lab_15/a.yaml"
+
+    - module: "16: Efficiency Testing"
+      details: "details/quality_testing.yaml"
+      sub_labs:
+        - "labs/lab_16/a.yaml"
+
+    - module: "17: Authentication Testing"
+      details: "details/app_security_controls.yaml"
+      sub_labs:
+        - "labs/lab_17/a.yaml"
+
+    - module: "18: Authorization Testing"
+      details: "details/app_security_controls.yaml"
+      sub_labs:
+        - "labs/lab_18/a.yaml"
+
+    - module: "19: Session Management Testing"
+      details: "details/app_security_controls.yaml"
+      sub_labs:
+        - "labs/lab_19/a.yaml"
+
+    - module: "20: Input Validation Testing"
+      details: "details/app_security_controls.yaml"
+      sub_labs:
+        - "labs/lab_20/a.yaml"
+
+    - module: "21: Output Validation Testing"
+      details: "details/app_security_controls.yaml"
+      sub_labs:
+        - "labs/lab_21/a.yaml"
+
+    - module: "22: Error Handling Testing"
+      details: "details/app_security_controls.yaml"
+      sub_labs:
+        - "labs/lab_22/a.yaml"
+
+    - module: "23: Logging & Monitoring Testing"
+      details: "details/app_security_controls.yaml"
+      sub_labs:
+        - "labs/lab_23/a.yaml"
+
+    - module: "24: Financial Abuse & API Cost Exploitation"
+      details: "details/financial_abuse.yaml"
+      sub_labs:
+        - "labs/lab_24/a.yaml"

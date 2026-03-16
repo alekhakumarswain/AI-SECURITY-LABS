@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Terminal | AI Security Labs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-sidebar: #0f172a;
+            --bg-main: #ffffff;
+            --bg-panel: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-blue: #2563eb;
+            --accent-green: #22c55e;
+            --accent-red: #ef4444;
+            --border: #e2e8f0;
+            --sidebar-text: #94a3b8;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-sidebar: #020617;
+                --bg-main: #0f172a;
+                --bg-panel: #1e293b;
+                --text-primary: #f8fafc;
+                --text-secondary: #94a3b8;
+                --accent-blue: #3b82f6;
+                --border: #334155;
+                --sidebar-text: #64748b;
+            }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-primary); height: 100vh; display: flex; overflow: hidden; -webkit-font-smoothing: antialiased; }
+
+        .sidebar { width: 300px; background: var(--bg-sidebar); display: flex; flex-direction: column; border-right: 1px solid var(--border); flex-shrink: 0; }
+        .sidebar-header { padding: 24px; border-bottom: 1px solid var(--border); }
+        .logo-text { color: white; font-size: 1rem; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo-text img { width: 24px; height: 24px; border-radius: 4px; }
+        .labs-nav { flex: 1; padding: 24px; overflow-y: auto; }
+        .nav-category { font-size: 0.75rem; font-weight: 600; color: var(--sidebar-text); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; margin-top: 24px; }
+        .nav-category:first-child { margin-top: 0; }
+        .nav-item { padding: 10px 12px; border-radius: 6px; font-size: 0.875rem; color: #cbd5e1; text-decoration: none; display: block; transition: all 0.2s; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.05); color: white; }
+        .nav-item.active { background: var(--accent-blue); color: white; }
+
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        header { height: 64px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--bg-main); }
+        .breadcrumbs { font-size: 0.875rem; color: var(--text-secondary); }
+        .breadcrumbs span { color: var(--text-primary); font-weight: 500; }
+
+        .lab-container { flex: 1; overflow-y: auto; padding: 40px; }
+        .welcome-screen { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+        .welcome-screen h2 { font-size: 2rem; margin-bottom: 12px; }
+
+        .lab-title-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; }
+        .lab-title-row h1 { font-size: 2.25rem; font-weight: 800; letter-spacing: -0.02em; }
+        .badge { padding: 4px 12px; background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); border-radius: 9999px; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(59, 130, 246, 0.2); }
+        .description-box { padding: 24px; background: var(--bg-panel); border-radius: 12px; border-left: 4px solid var(--accent-blue); margin-bottom: 40px; color: var(--text-secondary); font-size: 1rem; }
+
+        .lab-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; margin-bottom: 40px; }
+        .panel { background: var(--bg-main); border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; }
+        .panel-header { padding: 16px 24px; border-bottom: 1px solid var(--border); font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); }
+        .panel-body { padding: 24px; flex: 1; }
+
+        .step-item, .mitigation-item { display: flex; gap: 16px; margin-bottom: 20px; }
+        .num-circle { width: 24px; height: 24px; background: var(--accent-blue); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; }
+        .item-text strong { display: block; margin-bottom: 4px; font-size: 0.9375rem; }
+        .item-text span { font-size: 0.875rem; color: var(--text-secondary); }
+
+        .console { background: #020617; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; padding: 24px; border-radius: 12px; font-size: 0.875rem; line-height: 1.6; border: 1px solid var(--border); }
+        .prompt-line { color: var(--accent-blue); font-weight: 600; }
+        .success-line { color: var(--accent-green); }
+        .payload-box { background: rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 6px; margin: 12px 0; border: 1px solid rgba(255, 255, 255, 0.1); cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="/" class="logo-text">
+                <img src="/static/images/logo.png" alt="Logo">
+                SEC-AI LABS
+            </a>
+        </div>
+        <div class="labs-nav">
+            {% set categorized_labs = {} %}
+            {% for lab in labs %}
+                {% set cat = lab.category or "General" %}
+                {% if cat not in categorized_labs %}
+                    {% set _ = categorized_labs.update({cat: []}) %}
+                {% endif %}
+                {% set _ = categorized_labs[cat].append(lab) %}
+            {% endfor %}
+
+            {% for cat, items in categorized_labs.items() %}
+                <div class="nav-category">{{ cat }}</div>
+                {% for item in items %}
+                    <a href="/labs/{{ item.id }}" class="nav-item {% if selected_lab and selected_lab.id == item.id %}active{% endif %}">
+                        {{ item.title }}
+                    </a>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="nav-links" style="padding: 24px; border-top: 1px solid var(--border);">
+            <a href="/" class="nav-item" style="color: #cbd5e1;">Home</a>
+            <a href="/courses" class="nav-item" style="color: #cbd5e1;">Learning Path</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <div class="breadcrumbs">
+                Security Modules / <span>{{ selected_lab.title if selected_lab else "Discovery" }}</span>
+            </div>
+            <div class="user-status">
+                <span id="session-status" style="color:var(--accent-green); font-size:0.75rem; font-weight:700">LAB ONLINE</span>
+            </div>
+        </header>
+
+        {% if not selected_lab %}
+        <div class="welcome-screen">
+            <h2 style="font-weight: 800; letter-spacing: -0.02em;">Terminal Access Verified.</h2>
+            <p style="color: var(--text-secondary);">Select an offensive research module from the navigation sidebar to begin execution.</p>
+        </div>
+        {% else %}
+        <div class="lab-container">
+            <div class="lab-title-row">
+                <div>
+                    <span class="badge">{{ selected_lab.category or "Research Module" }}</span>
+                    <h1>{{ selected_lab.title }}</h1>
+                </div>
+            </div>
+
+            <div class="description-box">{{ selected_lab.description }}</div>
+
+            <div class="lab-grid">
+                <div class="panel">
+                    <div class="panel-header">Offensive Methodology</div>
+                    <div class="panel-body">
+                        {% set vectors = selected_lab.attack_types or selected_lab.vulnerability_list or selected_lab.process_phases or [] %}
+                        {% for v in vectors[:4] %}
+                        <div class="step-item">
+                            <div class="num-circle">{{ loop.index }}</div>
+                            <div class="item-text">
+                                <strong>{{ v.name or v.title or "Vector Index" }}</strong>
+                                <span>{{ v.description or v.details or "Component analysis required." }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">Remediation Controls</div>
+                    <div class="panel-body">
+                        {% set fixes = selected_lab.mitigations or selected_lab.remediation_strategies or [] %}
+                        {% for f in fixes[:4] %}
+                        <div class="step-item">
+                            <div class="num-circle" style="background:var(--accent-green)">✓</div>
+                            <div class="item-text">
+                                <strong>{{ f.name or "Control Matrix" }}</strong>
+                                <span>{{ f.description or (f if f is string else "Security control verified.") }}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">Interactive Payload Console</div>
+                <div class="console">
+                    <div><span class="prompt-line">system@sec-ai-lab:~$</span> initializing sandbox for {{ selected_lab.id }}...</div>
+                    {% for v in vectors %}
+                        {% if v.payload_example %}
+                        <div class="payload-box">
+                            <span style="color:#64748b"># {{ v.name }} payload</span><br>
+                            <code>{{ v.payload_example }}</code>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+</body>
+</html>

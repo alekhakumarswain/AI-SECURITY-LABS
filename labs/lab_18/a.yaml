@@ -1,0 +1,5 @@
+sub_lab_id: LAB-18-a
+parent_lab: "Authorization Testing"
+title: "Privilege Escalation in LLM"
+scenario: "A 'Standard' user trying to access the 'Admin' model."
+task: "Manipulate the model_id parameter in an API call to access a restricted high-tier model."

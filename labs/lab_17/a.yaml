@@ -1,0 +1,5 @@
+sub_lab_id: LAB-17-a
+parent_lab: "Authentication Testing"
+title: "The Token Bypass"
+scenario: "Testing for unauthenticated model access."
+task: "Attempt to call the /predict API without an Authorization header or with an expired token."

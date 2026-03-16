@@ -1,0 +1,99 @@
+id: quality_testing
+title: "AI System Quality & Performance Testing"
+
+description: >
+  AI Quality Testing focuses on the operational excellence, reliability, 
+  and efficiency of machine learning models in production. Unlike 
+  security testing which focuses on malicious intent, quality testing 
+  ensures that the system meets its functional requirements, provides 
+  accurate and faithful information, and remains cost-effective.
+
+  As LLMs are non-deterministic by nature, quality testing requires 
+  probabilistic evaluation frameworks (Evals) to maintain a high 
+  standard of user experience.
+
+category: "AI Operations / Quality Assurance & FinOps"
+
+affected_targets:
+
+- production LLM applications
+- RAG pipelines (Retrieval integrity)
+- real-time recommendation engines
+- automated content generation tools
+- financial and medical predictive models
+- Edge AI and embedded models
+
+testing_categories:
+
+- name: "Reliability & Hallucination Testing"
+  focus: >
+    Identifying 'hallucinations' (factually incorrect but plausible 
+    outputs) and ensuring consistency across semantically similar queries.
+  key_metrics:
+    - Hallucination Rate: Frequency of ungrounded statements.
+    - Consistency Score: Variance in answers to the same intent.
+    - Faithfulness: For RAG, how well the answer aligns with retrieved docs.
+    - Answer Relevance: Relevance of response to the user's actual prompt.
+
+- name: "Inference Performance Testing"
+  focus: >
+    Benchmarking the speed and responsiveness of the model under 
+    various load conditions.
+  key_metrics:
+    - Time to First Token (TTFT): Critical for user-perceived speed.
+    - Inter-Token Latency: Smoothness of the streaming experience.
+    - Tokens Per Second (TPS): Total model throughput.
+    - P99 Latency: Stability of response times for the 99th percentile.
+
+- name: "Scalability & Concurrency Testing"
+  focus: >
+    Verifying the system's ability to handle spike traffic and 
+    scaling the underlying GPU/CPU infrastructure.
+  key_metrics:
+    - Concurrent Request Capacity: Max requests before TPS drops.
+    - Auto-scaling Latency: Time to spin up new inference nodes.
+    - Error Rate at Load: 5xx errors during high concurrency.
+
+- name: "Model Drift & Degradation Monitoring"
+  focus: >
+    Detecting when a model's performance decays due to shifts in 
+    real-world data distribution (Data Drift or Concept Drift).
+  key_metrics:
+    - Population Stability Index (PSI): Measuring distribution shifts.
+    - Prediction Drift: Monitoring changes in model output patterns.
+    - Feature Attribution Shift: Changes in which features drive decisions.
+
+- name: "FinOps & Efficiency Testing"
+  focus: >
+    Optimizing the financial footprint of AI inference without 
+    sacrificing output quality.
+  techniques:
+    - Model Quantization: Reducing weight precision (INT8, FP8, AWQ).
+    - Batch Size Optimization: Maximizing GPU utilization.
+    - Token Pruning: Reducing input size to lower costs.
+
+optimization_strategies:
+
+- name: "Semantic Caching"
+  description: "Storing and retrieving responses for semantically identical queries to avoid redundant inference."
+- name: "Inference Acceleration"
+  description: "Using engines like TensorRT-LLM, vLLM, or TGI (Text Generation Inference) to boost throughput."
+- name: "A/B & Canary Testing"
+  description: "Gradually rolling out new model versions and comparing performance against a control group."
+- name: "Automated Eval Pipelines"
+  description: "Integrating LLM-as-a-judge (using GPT-4 or specialized models) into CI/CD for regression testing."
+
+quality_monitoring_tools:
+
+- Weights & Biases (WandB): Experiment tracking and model lineage.
+- Evidently AI: Monitoring data drift and model performance.
+- LangSmith / Arize Phoenix: Evaluation and observability for LLM apps.
+- Prometheus & Grafana: Infrastructure-level GPU/CPU monitoring.
+- DeepSpeed / vLLM: High-efficiency inference runtimes.
+
+related_categories:
+- financial_abuse
+- ai_agent_attacks
+- ai_security_methodology
+- app_security_controls
+

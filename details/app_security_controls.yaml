@@ -1,0 +1,245 @@
+id: app_security_controls
+title: "AI Application Security Controls"
+
+description: >
+  AI Application Security Controls are defensive mechanisms designed
+  to protect the infrastructure, APIs, and application layers
+  surrounding AI models.
+
+  Since modern AI systems are embedded into applications, agents,
+  and APIs, they inherit risks from both traditional web security
+  and AI-specific vulnerabilities such as prompt injection,
+  model abuse, and data leakage.
+
+  These controls enforce authentication, authorization, monitoring,
+  and guardrails to ensure secure AI system deployment.
+
+category: "AI Security / Defensive Controls"
+
+scope:
+
+- AI chat applications
+- AI agents
+- LLM APIs
+- RAG systems
+- enterprise AI assistants
+- AI SaaS platforms
+
+controls:
+
+- name: "Mutual Service Authentication (M2M)"
+  description: >
+    Use mutual TLS (mTLS) or OAuth2 scoped tokens for services
+    communicating with AI models to prevent unauthorized service
+    access and lateral movement.
+
+  implementation:
+
+  - enforce mTLS between microservices
+  - use short-lived service tokens
+  - validate API signatures
+
+- name: "Granular RBAC for Model Configuration"
+  description: >
+    Restrict who can modify critical model parameters such as
+    temperature, top_p, or system prompts.
+
+  risks_prevented:
+
+  - safety bypass
+  - malicious configuration changes
+
+  implementation:
+
+  - admin-only parameter modification
+  - audit logging for parameter changes
+
+- name: "Semantic Input Filtering"
+  description: >
+    Use a dedicated moderation or classification model to analyze
+    user prompts before sending them to the main LLM.
+
+  detection_targets:
+
+  - prompt injection attempts
+  - malicious instructions
+  - policy violations
+
+- name: "Structured Output Enforcement"
+  description: >
+    Force the model to produce structured responses using strict
+    schemas such as JSON to prevent arbitrary output execution.
+
+  tools:
+
+  - Pydantic
+  - Instructor
+  - JSON schema validators
+
+- name: "Token Rate Limiting & Quotas"
+  description: >
+    Limit the number of requests and token usage per user to
+    prevent denial-of-service attacks and financial abuse.
+
+  controls:
+
+  - requests per minute limits
+  - tokens per day quotas
+  - API usage caps
+
+- name: "Differential Error Handling"
+  description: >
+    Return generic error messages to users while logging detailed
+    errors internally to prevent information leakage.
+
+  example:
+  user_response: "An error occurred."
+  internal_log: "Invalid prompt structure detected in module X"
+
+- name: "AI-Aware WAF Rules"
+  description: >
+    Configure Web Application Firewalls with rules specifically
+    designed to detect AI prompt attacks.
+
+  detection_patterns:
+
+  - "ignore previous instructions"
+  - "system prompt"
+  - "developer mode"
+
+- name: "Prompt Isolation & Delimiters"
+  description: >
+    Separate user inputs from system instructions using delimiters
+    or XML-style tags.
+
+  example: |
+    <system>
+    system instructions </system>
+
+    <user_input>
+    user prompt
+    </user_input>
+
+- name: "Agent Tool Permission Control"
+  description: >
+    Restrict which tools an AI agent can access and define
+    strict execution policies.
+
+  protections:
+
+  - whitelist allowed tools
+  - restrict system commands
+  - require approval for sensitive operations
+
+- name: "API Key Security"
+  description: >
+    Secure API keys used by AI applications to prevent unauthorized
+    access.
+
+  implementation:
+
+  - store keys in secure vaults
+  - rotate keys regularly
+  - restrict by IP
+
+- name: "Context Window Protection"
+  description: >
+    Prevent attackers from pushing system prompts out of the
+    context window using extremely long prompts.
+
+  controls:
+
+  - input token truncation
+  - prompt length validation
+
+- name: "Output Content Filtering"
+  description: >
+    Scan generated responses to prevent leakage of sensitive data
+    or harmful content.
+
+  detection_targets:
+
+  - PII
+  - secrets
+  - malware code
+
+defense_in_depth:
+
+- layer: "Layer 1 - Edge Security"
+  controls:
+
+  - WAF
+  - DDoS protection
+  - rate limiting
+  - bot detection
+
+- layer: "Layer 2 - Input Guardrails"
+  controls:
+
+  - prompt injection detection
+  - moderation models
+  - semantic filtering
+
+- layer: "Layer 3 - Model Alignment"
+  controls:
+
+  - RLHF training
+  - supervised fine-tuning
+  - safety datasets
+
+- layer: "Layer 4 - Output Guardrails"
+  controls:
+
+  - PII detection
+  - harmful content filtering
+  - schema validation
+
+- layer: "Layer 5 - Continuous Monitoring"
+  controls:
+
+  - inference log monitoring
+  - anomaly detection
+  - SIEM integration
+
+monitoring_controls:
+
+- prompt anomaly detection
+- unusual token usage alerts
+- abnormal tool execution detection
+- API traffic analysis
+- behavioral analytics
+
+incident_response:
+
+- isolate compromised AI endpoint
+- revoke API keys
+- disable affected tools
+- analyze logs
+- deploy updated guardrails
+
+security_testing:
+
+- prompt injection testing
+- jailbreak testing
+- API abuse testing
+- AI agent tool exploitation testing
+- financial abuse simulation
+
+tools:
+
+- NVIDIA NeMo Guardrails
+- Llama Guard
+- LangKit
+- Lakera Guard
+- Promptfoo
+- Garak
+- PyRIT
+- Giskard
+
+related_categories:
+
+- adversarial_attacks
+- ai_agent_attacks
+- ai_security_methodology
+- financial_abuse
+- model_extraction

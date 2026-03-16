@@ -1,0 +1,5 @@
+sub_lab_id: LAB-20-a
+parent_lab: "Input Validation Testing"
+title: "The Malformed JSON Attack"
+scenario: "Testing the robust parsing of the AI API."
+task: "Send a JSON payload with intentionally broken syntax and check if it triggers a crash or a debug log."

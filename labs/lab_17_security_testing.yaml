@@ -1,0 +1,27 @@
+lab_id: LAB-17
+title: "API Breach: Endpoint Security Lab"
+vulnerability: "Insecure Model Deployment / API Vulnerability"
+difficulty: "Intermediate"
+
+scenario: >
+  An AI model is deployed as a Dockerized API. You will perform a 
+  standard web vulnerability scan (OWASP Top 10) on the API endpoint 
+  hosting the model.
+
+what_to_test: "Endpoints like /predict, /v1/chat, /health."
+
+why: >
+  An AI system is still a web application. If the API has an SQL injection 
+  or an unauthenticated management port, the model is completely compromised.
+
+attacks:
+  - "IDOR (Insecure Direct Object Reference) on model historical logs."
+  - "Bypassing API Key authentication."
+  - "Command injection via the model metadata endpoint."
+
+expected_outcome: >
+  The researcher gains unauthorized access to the model's prediction history.
+
+remediation:
+  - "Apply standard AppSec hardening (WAF, OAuth2, Rate Limiting)."
+  - "Perform regular vulnerability scans on the inference server."
