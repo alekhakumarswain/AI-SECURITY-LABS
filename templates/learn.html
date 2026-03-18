@@ -169,7 +169,11 @@
             .menu-toggle { display: block; }
 
             .detail-wrapper { flex-direction: column; padding-top: 100px; gap: 20px; }
-            .sidebar { width: 100%; position: relative; top: 0; max-height: none; border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; padding-bottom: 20px; margin-bottom: 20px; overflow-x: auto; }
+            .detail-wrapper.collapsed { gap: 0; }
+            
+            .sidebar { width: 100%; position: relative; top: 0; max-height: none; border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; padding-bottom: 20px; margin-bottom: 20px; overflow-x: auto; display: block; }
+            .sidebar.collapsed { display: none; height: 0; margin: 0; padding: 0; border: none; }
+            
             .sidebar h4 { margin-bottom: 16px; }
             .toc-group { margin-bottom: 16px; display: flex; flex-direction: column; gap: 4px; }
             .toc-group-title { width: 100%; margin-bottom: 8px; font-size: 0.8rem; }
@@ -321,17 +325,13 @@
                     if (sidebarToggle && sidebar && wrapper) {
                         sidebarToggle.addEventListener('click', () => {
                             sidebar.classList.toggle('collapsed');
-                            if (sidebar.classList.contains('collapsed')) {
-                                wrapper.style.gap = '0';
-                            } else {
-                                wrapper.style.gap = '40px';
-                            }
+                            wrapper.classList.toggle('collapsed');
                         });
                         
                         // Auto-collapse on small screens
                         if (window.innerWidth < 1150) {
                             sidebar.classList.add('collapsed');
-                            wrapper.style.gap = '0';
+                            wrapper.classList.add('collapsed');
                         }
                     }
                 </script>
