@@ -109,6 +109,10 @@ def read_lab_detail(request: Request, lab_id: str):
     })
 
 
+@app.get("/googlecd7dfb82e8598cb2.html")
+async def google_verification():
+    return FileResponse(os.path.join(BASE_DIR, "templates", "googlecd7dfb82e8598cb2.html"))
+
 # Mount static files
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
 
