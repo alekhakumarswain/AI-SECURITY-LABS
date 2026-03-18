@@ -3,7 +3,7 @@ import yaml
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.templating import Jinja2Templates
 import uvicorn
 
@@ -112,6 +112,21 @@ def read_lab_detail(request: Request, lab_id: str):
 @app.get("/googlecd7dfb82e8598cb2.html")
 async def google_verification():
     return FileResponse(os.path.join(BASE_DIR, "templates", "googlecd7dfb82e8598cb2.html"))
+
+@app.get("/robots.txt")
+async def robots():
+    content = "User-agent: *\nAllow: /\nSitemap: https://ai-security-labs.vercel.app/sitemap.xml"
+    return Response(content=content, media_type="text/plain")
+
+@app.get("/sitemap.xml")
+async def sitemap():
+    content = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url><loc>https://ai-security-labs.vercel.app/</loc><priority>1.0</priority></url>
+    <url><loc>https://ai-security-labs.vercel.app/courses</loc><priority>0.8</priority></url>
+    <url><loc>https://ai-security-labs.vercel.app/labs</loc><priority>0.8</priority></url>
+</urlset>"""
+    return Response(content=content, media_type="application/xml")
 
 # Mount static files
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
