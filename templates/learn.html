@@ -506,10 +506,8 @@
                 
                 if (currentIndex === tocItems.length - 1) {
                     btnNext.textContent = "Finish Course";
-                    btnNext.onclick = () => window.location.href = '/courses';
                 } else {
                     btnNext.textContent = "Next →";
-                    btnNext.onclick = () => { currentIndex++; updateUI(); };
                 }
 
                 // Smooth scroll to top
