@@ -124,7 +124,7 @@
             .hero { flex-direction: column; text-align: center; padding: 120px 5% 60px; gap: 40px; }
             .hero-text { order: 2; }
             .hero-visual { order: 1; max-width: 600px; margin: 0 auto; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.5rem !important; }
             .hero p { margin: 0 auto 32px; }
             .cta-group { justify-content: center; }
             .grid { grid-template-columns: 1fr; }
@@ -134,13 +134,14 @@
             .menu-toggle { display: block; }
             .github-btn { justify-content: center; }
             
-            footer div:first-child { grid-template-columns: 1fr !important; gap: 40px !important; text-align: center; }
-            footer div:first-child div { text-align: center; }
-            footer div:first-child div p { margin: 0 auto; }
+            .footer-grid { grid-template-columns: 1fr !important; gap: 40px !important; text-align: center !important; }
+            .footer-grid > div { text-align: center !important; }
+            .footer-grid p { margin: 0 auto !important; }
+            .footer-bottom { margin-top: 40px !important; }
         }
 
         @media (max-width: 640px) {
-            .hero h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2rem !important; }
             .cta-group { flex-direction: column; }
             .nav-links { padding: 30px 20px; }
         }
@@ -177,7 +178,7 @@
     <section class="hero">
         <div class="hero-text">
             <span class="badge">Version 2.0 • Professional Series</span>
-            <h1 style="font-size: 3.5rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 24px;">Advanced AI Security & <span>LLM Pentesting</span></h1>
+            <h1>Advanced AI Security & <span>LLM Pentesting</span></h1>
             <p>Develop hands-on expertise in red teaming Large Language Models and securing autonomous agents through offensive research simulations.</p>
             <div class="cta-group">
                 <a href="/courses" class="btn btn-primary">Start Training</a>
@@ -209,8 +210,8 @@
         </div>
     </section>
 
-    <footer style="padding: 80px 5% 40px; background: var(--bg-primary); border-top: 1px solid var(--border-color);">
-        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; text-align: left;">
+    <footer class="footer">
+        <div class="footer-grid" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; text-align: left;">
             <div>
                 <a href="/" class="logo" style="margin-bottom: 20px;">
                     <img src="/static/images/logo.png" alt="AI Security Lab Logo" style="width: 24px; height: 24px;">
@@ -235,7 +236,7 @@
                 </ul>
             </div>
         </div>
-        <div style="max-width: 1200px; margin: 80px auto 0; padding-top: 40px; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-secondary); font-size: 0.8125rem;">
+        <div class="footer-bottom" style="max-width: 1200px; margin: 80px auto 0; padding-top: 40px; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-secondary); font-size: 0.8125rem;">
             <p>© 2026 Offensive AI Security Laboratory. Empowering red teams worldwide.</p>
         </div>
     </footer>

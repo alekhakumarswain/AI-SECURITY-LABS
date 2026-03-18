@@ -153,6 +153,32 @@
         .btn-cta { display: inline-block; padding: 14px 28px; background-color: var(--accent-blue); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; margin-top: 24px; }
 
         footer { margin-top: 80px; padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.875rem; }
+
+        @media (max-width: 1150px) {
+            nav { padding: 0 20px; }
+            .nav-links { display: none; position: absolute; top: 64px; left: 0; width: 100%; background: var(--bg-primary); border-bottom: 1px solid var(--border-color); padding: 20px; flex-direction: column; gap: 16px; align-items: stretch; z-index: 1001; }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+
+            .detail-wrapper { flex-direction: column; padding-top: 100px; gap: 20px; }
+            .sidebar { width: 100%; position: relative; top: 0; max-height: none; border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; padding-bottom: 20px; margin-bottom: 20px; overflow-x: auto; }
+            .sidebar h4 { margin-bottom: 16px; }
+            .toc-group { margin-bottom: 16px; display: flex; flex-direction: column; gap: 4px; }
+            .toc-group-title { width: 100%; margin-bottom: 8px; font-size: 0.8rem; }
+            .toc-item { width: 100%; padding: 10px 12px; }
+            .toc-item.active { box-shadow: inset 4px 0 0 var(--accent-blue); }
+            
+            header h1 { font-size: 2rem; }
+            .lesson-title { font-size: 1.75rem; }
+            .lesson-content-box { padding: 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding-top: 100px; }
+            .lesson-title { font-size: 1.5rem; }
+            .lesson-nav { flex-direction: column; gap: 12px; }
+            .btn-nav { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 <body>
