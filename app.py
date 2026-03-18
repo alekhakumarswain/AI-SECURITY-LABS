@@ -128,6 +128,10 @@ async def sitemap():
 </urlset>"""
     return Response(content=content, media_type="application/xml")
 
+@app.get("/manifest.json")
+async def manifest():
+    return FileResponse(os.path.join(BASE_DIR, "static", "manifest.json"))
+
 # Mount static files
 app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
 

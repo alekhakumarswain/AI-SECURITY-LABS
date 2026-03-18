@@ -162,7 +162,10 @@
             <img src="/static/images/logo.png" alt="Logo">
             AI SECURITY LABS
         </a>
-        <div class="nav-links">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+        <div class="nav-links" id="navLinks">
             <a href="/">Home</a>
             <a href="/courses">Learning Path</a>
             <a href="https://github.com/alekhakumarswain/AI-SECURITY-LABS" target="_blank" class="github-btn">
@@ -171,6 +174,18 @@
             </a>
         </div>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 
     {% if not selected_course %}
     <div class="container">
