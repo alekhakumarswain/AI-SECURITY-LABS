@@ -66,6 +66,11 @@ async def api_get_course(course_id: str):
 def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.get("suusri.json")
+def read_root(request: Request):
+    return templates.TemplateResponse("suusri.json", {"request": request})
+
+
 @app.get("/courses")
 def read_courses_page(request: Request):
     courses = get_all_courses()
